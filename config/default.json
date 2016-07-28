@@ -1,0 +1,26 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "mongodb": "mongodb://localhost:27017/lysanoe",
+  "public": "../public/",
+  "auth": {
+    "token": {
+      "secret": "vaBt3K5Du8/eZT8kC2cMrZfCVlg9zYtDUgJJ/nbAvHYQ8NRy/kQYLjSo0GXcqDFhd1OQvFwQ1TG8NnIbV269dQ=="
+    },
+    "local": {},
+    "facebook": {
+      "clientID": "your facebook client id",
+      "clientSecret": "your facebook client secret",
+      "permissions": {
+        "scope": ["public_profile","email"]
+      }
+    },
+    "github": {
+      "clientID": "your github client id",
+      "clientSecret": "your github client secret",
+      "permissions": {
+        "scope": []
+      }
+    }
+  }
+}
