@@ -1,0 +1,93 @@
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Lysa Noé</title>
+
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/lysanoe.css" rel="stylesheet">
+        
+<!--        <scriptxxx   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"
+                  integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="
+                  crossorigin="anonymous"></script>-->
+                  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ 
+    </head>
+    
+    <body>
+        
+        <section id="logo-section" class="text-center">
+            <div id="homepage" class="container">
+                <!-- Site title -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="logo text-center">
+                            <h1>Lysa Noé</h1>
+                            <span>Mijn website</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+   
+        <div class="mainbody-section">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-3 text-center">
+                        <div class="menu-item" style="background: {{colour}};">
+                            <a id="menu-btn-{{module}}" href="#{{module}}-modal" data-toggle="modal">
+                                <i class="{{iconClass}}"></i>
+                                <p>{{longName}}</p>
+                            </a>   
+                        </div>
+                        <div class="menu-item" style="background: {{colour}};">
+                            <a id="menu-btn-{{module}}" href="#{{module}}-modal" data-toggle="modal">
+                                <i class="{{iconClass}}"></i>
+                                <p>{{longName}}</p>
+                            </a>   
+                        </div>
+                    </div>
+
+                </div><!--Eind row-->
+            </div><!--Eind container-->
+        </div><!-- End mainbody section-->       
+ 
+        <script type="text/javascript">
+            window.onload = function () {
+              
+              $.ajax({
+                  url:  'menuItems',
+                  success: function(data) {                  
+                      console.log('dataafters6', data);
+                      
+                      if (data) {
+                          for(index in data.data) {
+                              $('.menu-item').eq(index).find('p').html(data.data[index].longName)
+                          }
+                      }
+                  },
+                  error: function(data) {
+                      console.log('dataaftererror', data);
+                  }
+              });
+                //const app = feathers();
+                //app.use('/messages', {
+                //  get(id, params) {
+                //    return Promise.resolve({
+                //      id,
+                //      read: false,
+                //      text: `Feathers is great!`,
+                //      createdAt: new Date().getTime()
+                //    });
+                //  }
+                //});
+            }
+        </script> 
+                
+    </body>

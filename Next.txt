@@ -1,0 +1,149 @@
+NEXT
+====
+
+BUGS:
+
+
+
+PRIOs:
+- how to deploy to aws:
+  - aws server updaten (node, feathers, mongo)
+  - daar app daaiend maken
+  - deploy vanaf github??? jacq wertk direct op server???
+- windows ftp-disk maken
+
+
+- Install imagemagick on aws server
+  * then test foto turn and save
+- Foto in template: remove the rootUrl so find file at /upload/abc.png
+- Foto gemaakt op device thru site using camera: very long time to call server method
+- Na upload, delete, etc setImages opnieuw aanroepen om reactiveVar opnieuw te laden
+- Fotos vanaf camera gelijk op de site
+  * photo upload alleen voor geautoriseerden (niet alleen de knop) - is nu alleen admin
+  * foto niet juiste orientatie :-(
+  * via edit draaien en bewaren in 1 actie
+- refresh btn bij fotos
+- Fotos volgorde geven, meest recent bovenaan
+- Na sluiten grote foto, focus on the thumbnail
+- Na refresh, focus op laatste foto: OF: Session var anders gebruiken dat de refresh niet nodig is
+- Multiple fotos in 1 keer bij 'choose fotos'
+- video zichtbaarhied ook instelbaar
+- publish/notify/share fotos/blogs/etc to FB
+- verzamelen van #lysanoé
+- 1e verjaardag uitnodiging - mensen emailen  om lif te worden en dan de de info zien
+- Reply/comments on foto/blog, verwijderbaar maken
+- Timeline fotos toevoegen, liefst van foto lib, anders zoals tekstvak
+- in een tekstvak: fotos van de foto lib halen OF tekst vak fotos bewerken/recht zetten
+
+
+GENERAL:
+- M background kleur afmaken:
+  -niet alle modals hebben de juiste classes enzo
+  -de preset werkt niet altijd goed
+  -omzetten naar <input type="color">
+- M sanitize html before save to db
+    knoppen in editor beter zichtbaar
+- Phone app
+	- create app -> how to a single phone?
+	- pic via html5 input tag
+			werkt dat op een device?
+			keuze uit media?
+			hoe de file binnenkrijgen?
+	- pic from webcam
+	- TEST THIS: geef een betere filenaam mee van de foon camera, bijv een datum
+	- caption on pic from camera
+	- works in iOS ???
+	- upload-dir on mobile is verkeerd ???
+	- drawing on device: touch is off
+
+
+SECURITY
+- M 
+	all db reads to a .call
+	allowed + isAdmin + getModules to server side
+	isAdmin to isLevel
+	ADMIN, etc var to a string
+	
+
+INTRO
+- J mooi maken
+- J text kleuren bepalen voor de wysiwyg editor
+
+
+TIMELINE
+- J make the settings modals pretty
+- J het jaar weer op de lijn maken
+
+
+DRAWING
+- palette and lijndikte over elkaar op kleine scherm
+
+
+PHOTO
+/*
+ *Next:
+ * 2 error message to client if invalid file types or size
+ * 2 fixed dz area (always uploadable files)
+ * 2 van dropzone (dz) ook de verkenner krijgen
+ * 3 thumbnails in dz
+ * 5 foto acties als een aparte menu fixed naast de fotos?
+ * 6 select optie: selectie omkerern
+ * 7 actie optie: voorstelling starten
+ * 7 Kopieren binnen 1 album: kopieren van een file bijv via Nodejs fs.sync lib
+ * 7 Download: choice => with original name or caption name?
+ * 8 de laatste upload is alleen de laatse file, fix this
+ * 9 fotos volgorde geven
+ * 10 fotos effecten geven, bijv zwartwit
+ *
+ * Voor 2,3:
+ * OF
+ * kijken hoe deze de upload doet en dat toepassen bij de originele dz
+ * OF
+ * 1: kijken hoe de originele dz is configureerd en dat hier toepassen
+ */
+- J icoontjes original, inSlider bij fotos
+- J groter gebied om een foto aan te vinken
+- M foto download/toestaan ?
+- M gebied slepen om fotos te kiezen
+- M foto kleur aanpassingen
+
+
+CONTACT
+- M versturen formulier
+
+
+
+
+
+
+
+FASE 2
+======
+FOTO
+
+- Instagram fotos?
+
+BLOG
+- Reply/comments on foto/blog
+- publish/notify to FB
+
+INLOGGEN
+- eigen profiel aanpassen
+- naam meegeven bij registreren
+
+INTRO
+- M buttons in wysiyg edit for images
+- M after save: text shows twice!?
+
+TIMELINE
+- validation on timeline input?
+- sorteren timeline input logischer
+
+VIDEO
+- youtube videos full screen kunnen afspelen a la Vimeo
+
+APP
+- photo/video maken en gelijk uploaden
+
+KLEURPLATEN
+- kleurpaten maken
