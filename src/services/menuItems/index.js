@@ -9,10 +9,12 @@ module.exports = function() {
 
   const options = {
     Model: menuItems,
-    paginate: {
-      default: 5,
-      max: 25
-    }
+    paginate: false
+    //$sort: {sequence: 1},
+    //paginate: {
+    //  default: 25,
+    //  max: 25
+    //}
   };
 
   // Initialize our service with any options it requires

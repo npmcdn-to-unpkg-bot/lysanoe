@@ -40,22 +40,28 @@
                 <div class="row">
 
                     <div class="col-md-3 text-center">
-                        <div class="menu-item" style="background: {{colour}};">
-                            <a id="menu-btn-{{module}}" href="#{{module}}-modal" data-toggle="modal">
-                                <i class="{{iconClass}}"></i>
-                                <p>{{longName}}</p>
+                        <div class="menu-item" style="background:">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
                             </a>   
                         </div>
-                        <div class="menu-item" style="background: {{colour}};">
-                            <a id="menu-btn-{{module}}" href="#{{module}}-modal" data-toggle="modal">
-                                <i class="{{iconClass}}"></i>
-                                <p>{{longName}}</p>
+                        <div class="menu-item" style="background:">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
+                            </a>   
+                        </div>
+                        <div class="menu-item" style="background:">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
                             </a>   
                         </div>
                     </div>
 
-                </div><!--Eind row-->
-            </div><!--Eind container-->
+                </div><!--End row-->
+            </div><!--End container-->
         </div><!-- End mainbody section-->       
  
         <script type="text/javascript">
@@ -63,30 +69,24 @@
               
               $.ajax({
                   url:  'menuItems',
-                  success: function(data) {                  
-                      console.log('dataafters6', data);
-                      
+                  success: function(data) {
+                      console.log('Success for menuItems', data);
+                      var menuItem;
                       if (data) {
                           for(index in data.data) {
-                              $('.menu-item').eq(index).find('p').html(data.data[index].longName)
+                              menuItem = $('.menu-item').eq(index);
+                              menuItem.css('background', data.data[index].colour);
+                              menuItem.find('a').attr('id', 'menu-btn-' + data.data[index].module);
+                              menuItem.find('a').attr('href', data.data[index].module);
+                              menuItem.find('i').attr('class', data.data[index].iconClass);
+                              menuItem.find('p').html(data.data[index].longName);
                           }
                       }
                   },
                   error: function(data) {
-                      console.log('dataaftererror', data);
+                      console.log('Error after menuItems', data);
                   }
               });
-                //const app = feathers();
-                //app.use('/messages', {
-                //  get(id, params) {
-                //    return Promise.resolve({
-                //      id,
-                //      read: false,
-                //      text: `Feathers is great!`,
-                //      createdAt: new Date().getTime()
-                //    });
-                //  }
-                //});
             }
         </script> 
                 

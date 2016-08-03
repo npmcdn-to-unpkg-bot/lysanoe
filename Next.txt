@@ -12,6 +12,12 @@ PRIOs:
   - deploy vanaf github??? jacq wertk direct op server???
 - windows ftp-disk maken
 
+- menuItems service
+  * more than 5 items?
+  * sort on sequence?
+  
+  
+
 
 - Install imagemagick on aws server
   * then test foto turn and save
