@@ -73,6 +73,7 @@
                       console.log('Success for menuItems:', data);
                       var menuItem;
                       if (data) {
+                          if (data.data) data = data.data;
                           for(index in data) {
                               menuItem = $('.menu-item').eq(index);
                               menuItem.css('background', data[index].colour);

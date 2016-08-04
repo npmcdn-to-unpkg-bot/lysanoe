@@ -10,7 +10,7 @@ module.exports = function() {
   const options = {
     Model: menuItems,
     //paginate: false
-    //$sort: {sequence: 1},
+    $sort: {sequence: 1},
     paginate: {
         default: 25,
         max: 11
