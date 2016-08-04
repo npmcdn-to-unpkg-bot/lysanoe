@@ -30,4 +30,5 @@ node_modules
 lib/
 data/
 mongodb/
+config/default.json
 config/production.json
