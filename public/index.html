@@ -1,94 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
     <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="Lysa Noé" content="Website Lysa Noé">
+        
 
         <title>Lysa Noé</title>
 
-        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Font Awesome CSS -->
         <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/lysanoe.css" rel="stylesheet">
-        
-<!--        <scriptxxx   src="https://code.jquery.com/jquery-3.1.0.slim.min.js"
-                  integrity="sha256-cRpWjoSOw5KcyIOaZNo4i6fZ9tKPhYYb6i5T9RSVJG8="
-                  crossorigin="anonymous"></script>-->
-                  
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- 
+		
+		<!-- Custom CSS -->
+        <link href="css/animate.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+
+        <!-- Template js -->
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/contact_me.js"></script>
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/modernizr.custom.js"></script>
+        <script src="js/script.js"></script>
+
+
+
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
     </head>
     
     <body>
         
+        <div class="index">
+
+        <!-- START LOGO SECTION-->
         <section id="logo-section" class="text-center">
-            <div id="homepage" class="container">
-                <!-- Site title -->
+            <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                        <a href="#">
                         <div class="logo text-center">
                             <h1>Lysa Noé</h1>
                             <span>Mijn website</span>
                         </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
-   
-        <div class="mainbody-section">
+        <!-- END LOGO SECTION --> 
+
+        
+        <!-- START MAIN BODY SECTION -->
+        <div class="mainbody-section text-center">
             <div class="container">
                 <div class="row">
+                    
+                    <div class="col-md-2"> <!-- Menu-block left -->
+                        
+                        <div class="menu-item blue">
+                            <a href="sketchy.html">
+                                <i class="fa fa-paint-brush"></i>
+                                <p>Kleurboek</p>
+                            </a>
+                        </div>
+                        
+                        <div class="menu-item green">
+                            <a href="photo.html">
+                                <i class="fa fa-camera"></i>
+                                <p>Foto's</p>
+                            </a>
+                        </div>
 
-                    <div class="col-md-3 text-center">
-                        <div class="menu-item" style="background:">
-                            <a id="menu-btn" href="#">
-                                <i class=""></i>
-                                <p><!-- longName --></p>
-                            </a>   
+                        <div class="menu-item light-red">
+                            <a href="#introduction-modal" data-toggle="modal">
+                                <i class="fa fa-user"></i>
+                                <p>Hallo</p>
+                            </a>
                         </div>
-                        <div class="menu-item" style="background:">
-                            <a id="menu-btn" href="#">
-                                <i class=""></i>
-                                <p><!-- longName --></p>
-                            </a>   
+
+                        <div class="menu-item red">
+                            <a href="#blogopa-modal" data-toggle="modal">
+                                <i class="fa fa-pencil"></i>
+                                <p>Blog opa</p>
+                            </a>
                         </div>
-                        <div class="menu-item" style="background:">
-                            <a id="menu-btn" href="#">
-                                <i class=""></i>
-                                <p><!-- longName --></p>
-                            </a>   
+                        
+                    </div>
+ 
+                    <div class="col-md-2"> <!-- Menu-block right -->
+                        <div class="menu-item color">
+                            <a href="#admin-modal" data-toggle="modal">
+                                <i class="fa fa-key"></i>
+                                <p>Configuratie</p>
+                            </a>
+                        </div>
+                    
+                        <div class="menu-item light-orange">
+                            <a href="#birthday-modal" data-toggle="modal">
+                                <i class="fa fa-birthday-cake"></i>
+                                <p>Jarig</p>
+                            </a>
+                        </div>
+
+                        <div class="menu-item purple">
+                            <a href="#video-modal" data-toggle="modal">
+                                <i class="fa fa-video-camera"></i>
+                                <p>Video's</p>
+                            </a>
+                        </div>
+
+                        <div class="menu-item blue">
+                            <a href="#contact-modal" data-toggle="modal">
+                                <i class="fa fa-globe"></i>
+                                <p>Contact</p>
+                            </a>
+                        </div>                        
+                    </div>
+
+                </div><!-- End row -->                 
+            </div> <!-- End Container -->
+        </div> <!-- End mainbody-section text-center -->
+        <!-- END MAIN BODY SECTION-->
+        
+
+        <!-- START COPYRIGHT SECTION-->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div>
+                   
+                        <form class="login">
+                            <p><span>Inloggen:</span> &nbsp;&nbsp Email: <input type="email" name="loginemail">
+                               Wachtwoord: <input type="password" name="loginpassword"> &nbsp;&nbsp;&nbsp;
+                               <button type="submit" class="btn">Inloggen</button> &nbsp;&nbsp;&nbsp;
+                            <span> of </span> &nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i>Inloggen</button>
+                            </p>
+                        </form>
+
+                        <!-- WACHTWOORD ONDERHOUD -->
+                        <div class="reset pull-right"><a href="#reset-modal" data-toggle="modal">Wachtwoord onderhoud</a></div>
+
+                    </div>
+
+                    <div>
+                        <div class="loggedin">
+                            <span>Ingelogd als:</span> &nbsp;&nbsp;&nbsp;
+                            <span class="sign-out"><a id="logout-btn" href="#">Uitloggen</a></span>
+                        </div>
+                        <br>
+
+                        <div>
+                            <div class="jacqmarq"><a href="mailto: mark@filius.cc" target="_blank">Jacq & Marq © 2016</a></div>
+                            <div><a id="reset-btn" href="#reset-modal"></a></div>
+                        </div>
+                        
+                    </div>
+
+                </div><!-- End Row -->
+            </div><!-- End container -->
+        </div><!-- End copyright -->
+        <!-- END COPYRIGHT SECTION -->
+        
+        
+        <!-- START INTRODUCTION SECTION -->
+        <div class="section-modal modal fade" id="introduction-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title text-center">
+                            <h3>Hallo</h3>
+                            <p></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="skill-shortcode">
+                        
+                                <!-- Progress Bar -->
+                                <div class="skill">
+                                    <p>Web Design</p>          
+                                    <div class="progress">         
+                                        <div class="progress-bar" role="progressbar"  data-percentage="60">
+                                            <span class="progress-bar-span" >60%</span>
+                                            <span class="sr-only">60% Complete</span>
+                                        </div>
+                                    </div>  
+                                </div>
+
+                                <!-- Progress Bar -->
+                                <div class="skill">
+                                    <p>HTML & CSS</p>          
+                                    <div class="progress">         
+                                        <div class="progress-bar" role="progressbar"  data-percentage="95">
+                                            <span class="progress-bar-span" >95%</span>
+                                            <span class="sr-only">95% Complete</span>
+                                        </div>
+                                    </div>  
+                                </div>
+
+                                <!-- Progress Bar -->
+                                <div class="skill">
+                                    <p>Wordpress</p>          
+                                    <div class="progress">         
+                                        <div class="progress-bar" role="progressbar"  data-percentage="80">
+                                            <span class="progress-bar-span" >80%</span>
+                                            <span class="sr-only">80% Complete</span>
+                                        </div>
+                                    </div>  
+                                </div>
+
+                                <!-- Progress Bar -->
+                                <div class="skill">
+                                    <p>Joomla</p>          
+                                    <div class="progress">         
+                                        <div class="progress-bar" role="progressbar"  data-percentage="100">
+                                            <span class="progress-bar-span" >100%</span>
+                                            <span class="sr-only">100% Complete</span>
+                                        </div>
+                                    </div>  
+                                </div>
+
+                                <!-- Progress Bar -->
+                                <div class="skill">
+                                    <p>Extension</p>          
+                                    <div class="progress">         
+                                        <div class="progress-bar" role="progressbar"  data-percentage="70">
+                                            <span class="progress-bar-span" >70%</span>
+                                            <span class="sr-only">70% Complete</span>
+                                        </div>
+                                    </div>  
+                                </div>
+
+                            </div><!-- End skill -->
+                        </div><!-- End col-md -->
+              
+                    </div><!-- End row -->
+                </div><!-- End container -->
+                
+            </div> <!-- End modal-content -->
+        </div> <!-- End introduction modal -->
+        <!-- END INTRODUCTION SECTION -->
+        
+
+        <!-- START DRAWING SECTION -->
+        <div class="section-modal modal fade" id="drawing-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title text-center">
+                            <h3>Kleurboek van Lysa Noé</h3>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+            </div><!-- End modal-content -->
+        </div><!-- End section-modal -->
+        <!-- END DRAWING SECTION -->
+        
+
+
+        <!-- START VIDEO SECTION -->
+        <div class="section-modal modal fade" id="video-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title text-center">
+                            <h3>Video's</h3>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        
+                        <div class="col-md-4">
+                            <div class="portfolio-item">
+                                <img src="images/portfolio/1.png" class="img-responsive" alt="...">
+                                <div class="portfolio-details text-center">
+                                    <h4></h4>
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div> --><!-- /.row -->
+                </div>
+                
+            </div>
+        </div>
+        <!-- END VIDEO SECTION -->
+            
+        
+        <!-- START ADMIN SECTION -->
+        <div class="section-modal modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    
+                    <h1>Wie mag wat</h1><br>
+
+                        <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-3">E-mail adres</th>
+                                    <th class="col-md-3">Naam</th>
+                                    <th class="col-md-1">Datum geregistreerd</th>
+                                    <th class="col-md-1">Laatse login</th>
+                                    <th class="col-md-1">Relatie</th>
+                                    <th class="col-md-1">Actie</th>
+                                </tr>
+                            </thead>
+                        <tbody>
+                           
+                                <tr>
+                                    <td class="center">{{emailAddress}}</td>
+                                    <td class="center">{{personName}}</td>
+                                    <td class="center">{{createdAt}}</td>
+                                    <td class="center">{{lastLoginAt}}</td>
+                                    <td class="center">
+                                        <select class="relationship-select" data-user-id="{{_id}}">
+                                           
+                                        </select>
+                                    </td>
+                                    <td class="center">
+                                        <a class="btn btn-danger delete-btn" href="#" data-user-id="{{_id}}">
+                                            <i class="glyphicon glyphicon-trash icon-white"></i>
+                                            
+                                        </a>
+                                    </td>
+                                </tr>
+                            
+                        </tbody>
+                        </table>
+                   
+                </div>
+                               
+            </div>
+        </div>
+        <!-- END ADMIN SECTION -->
+        
+          
+        <!-- START BIRTHDAY SECTION -->
+        <div class="section-modal modal fade" id="birthday-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title text-center">
+                            <h3>Ik ben jarig</h3>
+                            <p>23 augustus feestje</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-md-3 col-sm-6">
+                            <!-- <div class="team-member">
+                                <img src="images/team/manage-1.png" class="img-responsive" alt="">
+                                <div class="team-details">
+                                    <h4>LYSA NOE 1 JAAR</h4>
+                                    <div class="designation"></div>
+                                    <ul style="text-align: center;">
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                        </div>
+                        
+                    </div><!-- /.row -->
+                </div>
+                
+            </div>
+        </div>
+        <!-- END BIRTHDAY SECTION -->
+        
+        
+        <!-- START BLOGOPA -->
+        <div class="section-modal modal fade" id="blogopa-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title text-center">
+                            <h3>Blog van opa</h3>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="latest-post">
+                                <img src="images/blog-01.jpg" class="img-responsive" alt="">
+                                <h4><a href="#">Welkom Lysa Noé!</a></h4>
+                                <div class="post-details">
+                                    <ul>
+                                        <li><i class="fa fa-user"></i> van Opa</li>
+                                        <li><i class="fa fa-calendar"></i> 12 augustus 2015</li>
+                                        <!-- <li><i class="fa fa-tag"></i> blij</li> -->
+                                    </ul>
+                                </div>
+                                <p>Met deze site willen we je welkom heten in de wereld! Jacqueline en ik hebben de site gemaakt, we hopen dat je 'm ook leuk vindt. Maar je bent al behoorlijk digitaal. Je was al aan het emailen vanuit de baarmoeder! Knapperd (en ik kreeg de schuld!). Een van je emails heb ik weten te onderscheppen: </p>
+                                <p>
+                                    <i>Hoi Mam, 
+                                    <br>
+                                    Leuk he dat we over een paar dagen een beetje rust hebben?! Niet meer al dat racen naar het werk enzo!
+                                    Nog ff een vraagje: ik mag zeker nog geen Facebook pagina, he?
+                                    Ik heb gelezen dat je eerst 13 moet zijn. Zoooooooo lang wachten!
+                                    xxx LN</i>
+                                </p>
+
+                                <p>Nou, vroeg bij of niet, ik vind 't ook: geen FB totdat je 13 bent!
+
+                                :-)
+                                Liefs van Opa!</p>
+
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- END BLOG OPA -->
+        
+        
+        <!-- START CONTACT SECTION -->
+        <div class="section-modal modal fade contact" id="contact-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title text-center">
+                            <h3>CONTACT</h3>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-md-4">
+                            <div class="footer-contact-info">
+                                <h4>Contact info</h4>
+                                <ul>
+                                    <li><strong>E-mail :</strong> lysanoe@mail.com</li>
+                                    <li><strong>Telefoonnummer :</strong> Nog niet</li>
+                                    <li><strong>Mobile :</strong> Zou ik wel willen</li>
+                                    <li><strong>Web :</strong> Lysanoe.nl</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                       <!--  <div class="col-md-4">
+                            <div class="footer-social text-center">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        
+                        <div class="col-md-4">
+                            <div class="footer-contact-info">
+                                <h4>Slaapjes</h4>
+                                <ul>
+                                    <li><strong>Ma-Vr :</strong> 19.00 uur tot 7 uur</li>
+                                    <li><strong>Za :</strong> 20.00 uur tot 8 uur</li>
+                                    <li><strong>Zondag :</strong> Hele dag</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div><!--/.row -->
+                    <!-- <div class="row" style="padding-top: 80px;">
+                        <div class="col-md-12">
+                            <form name="sentMessage" id="contactForm" novalidate>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="tel" class="form-control" placeholder="Your Phone *" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-12 text-center">
+                                        <div id="success"></div>
+                                        <button type="submit" class="btn btn-primary">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- END ROW -->
+                </div><!-- END CONTAINER -->
+                
+            </div><!-- END MODAL CONTENT -->
+        </div><!-- END SECTION MODAL -->
+        <!-- END CONTACT SECTION -->
+        
+       
+
+        <!-- De reset modal -->
+        <div class="section-modal modal fade" id="reset-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-content">
+
+
+                    <div class="section section-breadcrumbs">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h1>Wachtwoord vergeten?</h1>
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="resetPassword" class="btn pull-left"><h2>Stuur me een email met instructies</h2></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                </div><!--End row-->
-            </div><!--End container-->
-        </div><!-- End mainbody section-->       
- 
-        <script type="text/javascript">
-            window.onload = function () {
-              
-              $.ajax({
-                  url:  'menuItems',
-                  success: function(data) {
-                      console.log('Success for menuItems:', data);
-                      var menuItem;
-                      if (data) {
-                          if (data.data) data = data.data;
-                          for(index in data) {
-                              menuItem = $('.menu-item').eq(index);
-                              menuItem.css('background', data[index].colour);
-                              menuItem.find('a').attr('id', 'menu-btn-' + data[index].module);
-                              menuItem.find('a').attr('href', data[index].module);
-                              menuItem.find('i').attr('class', data[index].iconClass);
-                              menuItem.find('p').html(data[index].longName);
-                          }
-                      }
-                  },
-                  error: function(data) {
-                      console.log('Error after menuItems', data);
-                  }
-              });
-            }
-        </script> 
-                
+                    <br><br>
+
+            
+                        <div class="section section-breadcrumbs">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h1>Wachtwoord wijzigen</h1>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type='password' class="form-control" id="previousPassword" placeholder="Bestaande">
+                                        <input type='password' class="form-control" id="newPassword" placeholder="Nieuwe">
+                                        <button id="changePassword" class="btn pull-left"><h2>Verander</h2></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                 
+                   
+                </div>
+            </div><!-- END RESET MODAL -->
+        
+        </div><!-- End Index -->    
     </body>
+    
+</html>
