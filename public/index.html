@@ -70,16 +70,16 @@
               $.ajax({
                   url:  'menuItems',
                   success: function(data) {
-                      console.log('Success for menuItems', data);
+                      console.log('Success for menuItems:', data);
                       var menuItem;
                       if (data) {
-                          for(index in data.data) {
+                          for(index in data) {
                               menuItem = $('.menu-item').eq(index);
-                              menuItem.css('background', data.data[index].colour);
-                              menuItem.find('a').attr('id', 'menu-btn-' + data.data[index].module);
-                              menuItem.find('a').attr('href', data.data[index].module);
-                              menuItem.find('i').attr('class', data.data[index].iconClass);
-                              menuItem.find('p').html(data.data[index].longName);
+                              menuItem.css('background', data[index].colour);
+                              menuItem.find('a').attr('id', 'menu-btn-' + data[index].module);
+                              menuItem.find('a').attr('href', data[index].module);
+                              menuItem.find('i').attr('class', data[index].iconClass);
+                              menuItem.find('p').html(data[index].longName);
                           }
                       }
                   },
