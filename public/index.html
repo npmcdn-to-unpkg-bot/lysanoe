@@ -26,9 +26,8 @@
         <!-- Custom Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
-
         <!-- Template js -->
-        <script src="js/jquery-2.1.1.min.js"></script>
+        <script src="js/jquery-3.1.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/jquery.appear.js"></script>
         <script src="js/contact_me.js"></script>
@@ -36,12 +35,41 @@
         <script src="js/modernizr.custom.js"></script>
         <script src="js/script.js"></script>
 
-
-
+        <!-- IE specials --> 
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <script type="text/javascript">
+          
+            // Things to do after the page loads
+            window.onload = function () {
+              
+              // Get the menu items: names, colours, links, etc
+              $.ajax({
+                  url:  'menuItems',
+                  success: function(data) {
+                      console.log('Success for menuItems:', data);
+                      var menuItem;
+                      if (data) {
+                          if (data.data) data = data.data;
+                          for (index in data) {
+                              menuItem = $('.menu-item').eq(index);
+                              menuItem.css('background', data[index].colour);
+                              menuItem.find('a').attr('id', 'menu-btn-' + data[index].module);
+                              menuItem.find('a').attr('href', data[index].module);
+                              menuItem.find('i').attr('class', data[index].iconClass);
+                              menuItem.find('p').html(data[index].longName);
+                          }
+                      }
+                  },
+                  error: function(data) {
+                      console.log('Error after menuItems', data);
+                  }
+              });
+            }
+        </script> 
 
     </head>
     
@@ -74,66 +102,69 @@
                     
                     <div class="col-md-2"> <!-- Menu-block left -->
                         
-                        <div class="menu-item blue">
-                            <a href="sketchy.html">
-                                <i class="fa fa-paint-brush"></i>
-                                <p>Kleurboek</p>
+                        <div class="menu-item" style="background:transparent">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
                             </a>
                         </div>
                         
-                        <div class="menu-item green">
-                            <a href="photo.html">
-                                <i class="fa fa-camera"></i>
-                                <p>Foto's</p>
+                        <div class="menu-item" style="background:transparent">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
                             </a>
                         </div>
-
-                        <div class="menu-item light-red">
-                            <a href="#introduction-modal" data-toggle="modal">
-                                <i class="fa fa-user"></i>
-                                <p>Hallo</p>
+                        
+                        <div class="menu-item" style="background:transparent">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
                             </a>
                         </div>
+                        
+                        <div class="menu-item" style="background:transparent">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
+                            </a>
+                        </div>
+                                            </div>
+ 
 
-                        <div class="menu-item red">
-                            <a href="#blogopa-modal" data-toggle="modal">
-                                <i class="fa fa-pencil"></i>
-                                <p>Blog opa</p>
+
+                    <div class="col-md-2"> <!-- Menu-block right -->
+                        
+                        <div class="menu-item" style="background:transparent">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
+                            </a>
+                        </div>
+                        
+                        <div class="menu-item" style="background:transparent">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
+                            </a>
+                        </div>
+                        
+                        <div class="menu-item" style="background:transparent">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
+                            </a>
+                        </div>
+                        
+                        <div class="menu-item" style="background:transparent">
+                            <a id="menu-btn" href="#">
+                                <i class=""></i>
+                                <p><!-- longName --></p>
                             </a>
                         </div>
                         
                     </div>
  
-                    <div class="col-md-2"> <!-- Menu-block right -->
-                        <div class="menu-item color">
-                            <a href="#admin-modal" data-toggle="modal">
-                                <i class="fa fa-key"></i>
-                                <p>Configuratie</p>
-                            </a>
-                        </div>
-                    
-                        <div class="menu-item light-orange">
-                            <a href="#birthday-modal" data-toggle="modal">
-                                <i class="fa fa-birthday-cake"></i>
-                                <p>Jarig</p>
-                            </a>
-                        </div>
-
-                        <div class="menu-item purple">
-                            <a href="#video-modal" data-toggle="modal">
-                                <i class="fa fa-video-camera"></i>
-                                <p>Video's</p>
-                            </a>
-                        </div>
-
-                        <div class="menu-item blue">
-                            <a href="#contact-modal" data-toggle="modal">
-                                <i class="fa fa-globe"></i>
-                                <p>Contact</p>
-                            </a>
-                        </div>                        
-                    </div>
-
                 </div><!-- End row -->                 
             </div> <!-- End Container -->
         </div> <!-- End mainbody-section text-center -->

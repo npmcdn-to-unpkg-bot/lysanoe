@@ -27,6 +27,13 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
+# Mac files
+.DS_store
+
+# Lysa Noe files
+start.sh
+stop.sh
+restart.sh
 lib/
 data/
 mongodb/
