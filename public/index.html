@@ -38,11 +38,83 @@
 
 
 
+        <!-- IE specials -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <script type="text/javascript">
+          
+            // Things to do after the page loads
+            window.onload = function () {
+              
+              // Get the menu items: names, colours, links, etc
+              $.ajax({
+                  url:  'menuItems',
+                  success: function(data) {
+                      console.log('Success for menuItems:', data);
+                      var menuItem;
+                      if (data) {
+                          if (data.data) data = data.data;
+                          for (index in data) {
+                              menuItem = $('.menu-item').eq(index);
+                              menuItem.css('background', data[index].colour);
+                              menuItem.find('a').attr('id', 'menu-btn-' + data[index].module);
+                              menuItem.find('a').attr('href', data[index].module + '/' + data[index].module + '.html');
+                              menuItem.find('i').attr('class', data[index].iconClass);
+                              menuItem.find('p').html(data[index].longName);
+                          }
+                      }
+                  },
+                  error: function(data) {
+                      console.log('Error after menuItems', data);
+                  }
+              });
+            }
+            
+
+            // Set up Feathers client side
+            var host = 'http://localhost:3030';
+            var app = feathers()
+                .configure(feathers.rest(host).jquery(jQuery))
+                .configure(feathers.hooks())
+                .configure(feathers.authentication({
+                    //type: 'local'
+                    //storage: window.localStorage
+                }));
+
+
+            // Login function
+            function loginNow(loginType) {
+              
+              if (loginType == 'local') {
+                  app.authenticate({
+                      type: 'local',
+                     'email': $('input.login-email').val(),
+                     'password': $('input.login-password').val()
+                  }).then(function(result){
+                     console.log('Authenticated!', app.get('token'));
+                  }).catch(function(error){
+                     console.error('Error authenticating!', error);
+                  });
+              } else if (loginType == 'fb') {
+                  app.authenticate({
+                      type: 'facebook',
+                      facebook: {
+                        strategy: /*'FacebookStrategy'   //*/'passport-facebook'
+                      }
+                  }).then(function(result){
+                     console.log('Authenticated FB!', app.get('token'));
+                  }).catch(function(error){
+                     console.error('Error authenticating FB', error);
+                  });
+               
+              }
+            }
+        </script> 
+
+ 
     </head>
     
     <body class="home">
@@ -72,65 +144,63 @@
                     <div class="row">
                         
                         <div class="col-md-2"> <!-- Menu-block left -->
-                            
-                            <div class="menu-item blue">
-                                <a href="drawing/drawing.html">
-                                    <i class="fa fa-paint-brush"></i>
-                                    <p>Kleurboek</p>
+                            <div class="menu-item" style="background:transparent">
+                                <a id="menu-btn" href="#">
+                                    <i class=""></i>
+                                    <p><!-- longName --></p>
                                 </a>
                             </div>
                             
-                            <div class="menu-item green">
-                                <a href="photo/photo.html">
-                                    <i class="fa fa-camera"></i>
-                                    <p>Foto's</p>
-                                </a>
-                            </div>
-
-                            <div class="menu-item light-red">
-                                <a href="introduction/introduction.html">
-                                    <i class="fa fa-user"></i>
-                                    <p>Hallo</p>
-                                </a>
-                            </div>
-
-                            <div class="menu-item red">
-                                <a href="blogopa/blogopa.html">
-                                    <i class="fa fa-pencil"></i>
-                                    <p>Blog opa</p>
+                            <div class="menu-item" style="background:transparent">
+                                <a id="menu-btn" href="#">
+                                    <i class=""></i>
+                                    <p><!-- longName --></p>
                                 </a>
                             </div>
                             
+                            <div class="menu-item" style="background:transparent">
+                                <a id="menu-btn" href="#">
+                                    <i class=""></i>
+                                    <p><!-- longName --></p>
+                                </a>
+                            </div>
+                            
+                            <div class="menu-item" style="background:transparent">
+                                <a id="menu-btn" href="#">
+                                    <i class=""></i>
+                                    <p><!-- longName --></p>
+                                </a>
+                            </div>
                         </div>
      
                         <div class="col-md-2"> <!-- Menu-block right -->
-                            <div class="menu-item color">
-                                <a href="admin/admin.html">
-                                    <i class="fa fa-key"></i>
-                                    <p>Configuratie</p>
+                            <div class="menu-item" style="background:transparent">
+                                <a id="menu-btn" href="#">
+                                    <i class=""></i>
+                                    <p><!-- longName --></p>
                                 </a>
                             </div>
-                        
-                            <div class="menu-item light-orange">
-                                <a href="birthday/birthday.html">
-                                    <i class="fa fa-birthday-cake"></i>
-                                    <p>Jarig</p>
+                            
+                            <div class="menu-item" style="background:transparent">
+                                <a id="menu-btn" href="#">
+                                    <i class=""></i>
+                                    <p><!-- longName --></p>
                                 </a>
                             </div>
-
-                            <div class="menu-item purple">
-                                <a href="video/video.html">
-                                    <i class="fa fa-video-camera"></i>
-                                    <p>Video's</p>
+                            
+                            <div class="menu-item" style="background:transparent">
+                                <a id="menu-btn" href="#">
+                                    <i class=""></i>
+                                    <p><!-- longName --></p>
                                 </a>
                             </div>
-
-                            <div class="menu-item blue">
-                                <a href="contact/contact.html">
-                                    <i class="fa fa-globe"></i>
-                                    <p>Contact</p>
+                            
+                            <div class="menu-item" style="background:transparent">
+                                <a id="menu-btn" href="#">
+                                    <i class=""></i>
+                                    <p><!-- longName --></p>
                                 </a>
-                            </div>                        
+                            </div>
                         </div>
 
                     </div><!-- End row -->                 
@@ -145,14 +215,16 @@
                     <div class="row">
                         <div>
                        
-                            <form class="login">
-                                <p><span>Inloggen:</span> &nbsp;&nbsp Email: <input type="email" name="loginemail">
-                                   Wachtwoord: <input type="password" name="loginpassword"> &nbsp;&nbsp;&nbsp;
-                                   <button type="submit" class="btn">Inloggen</button> &nbsp;&nbsp;&nbsp;
+                        <xxxform class="login">
+                            <p>
+                                <span>Inloggen:</span> &nbsp;&nbsp
+                                Email: <input type="email" class="login-email">
+                                Wachtwoord: <input type="password" class="login-password"> &nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn" onclick='loginNow("local");'>Inloggen</button> &nbsp;&nbsp;&nbsp;
                                 <span> of </span> &nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i>Inloggen</button>
-                                </p>
-                            </form>
+                                <button type=button class="btn btn-social btn-facebook" onclick='loginNow("fb");'><i class="fa fa-facebook"></i>Inloggen</button>
+                            </p>
+                        </xxxform>
 
                             <!-- <!-- WACHTWOORD ONDERHOUD -->
                             <div class="reset pull-right"><a href="../reset.html">Wachtwoord onderhoud</a></div> 
