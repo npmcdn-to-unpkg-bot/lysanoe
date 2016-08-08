@@ -2,13 +2,11 @@
 <html lang="en">
 
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="Lysa Noé" content="Website Lysa Noé">
         
-
         <title>Lysa Noé</title>
 
         <!-- Bootstrap Core CSS -->
@@ -17,7 +15,7 @@
         <!-- Font Awesome CSS -->
         <link href="css/font-awesome.min.css" rel="stylesheet">
 		
-		<!-- Custom CSS -->
+        <!-- Custom CSS -->
         <link href="css/animate.css" rel="stylesheet">
 
         <!-- Custom CSS -->
@@ -25,7 +23,6 @@
 
         <!-- Custom Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-
 
         <!-- Template js -->
         <script src="js/jquery-2.1.1.min.js"></script>
@@ -35,8 +32,8 @@
         <script src="js/jqBootstrapValidation.js"></script>
         <script src="js/modernizr.custom.js"></script>
         <script src="js/script.js"></script>
-
-
+        <script src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+        <script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
 
         <!-- IE specials -->
         <!--[if lt IE 9]>
@@ -46,6 +43,10 @@
 
         <script type="text/javascript">
           
+            'use strict';
+          
+            var app;
+            
             // Things to do after the page loads
             window.onload = function () {
               
@@ -57,7 +58,7 @@
                       var menuItem;
                       if (data) {
                           if (data.data) data = data.data;
-                          for (index in data) {
+                          for (var index in data) {
                               menuItem = $('.menu-item').eq(index);
                               menuItem.css('background', data[index].colour);
                               menuItem.find('a').attr('id', 'menu-btn-' + data[index].module);
@@ -72,18 +73,16 @@
                   }
               });
             }
-            
 
             // Set up Feathers client side
             var host = 'http://localhost:3030';
-            var app = feathers()
+            app = feathers()
                 .configure(feathers.rest(host).jquery(jQuery))
                 .configure(feathers.hooks())
                 .configure(feathers.authentication({
                     //type: 'local'
                     //storage: window.localStorage
                 }));
-
 
             // Login function
             function loginNow(loginType) {
@@ -113,12 +112,10 @@
               }
             }
         </script> 
-
- 
     </head>
     
+    
     <body class="home">
-        
         
             <!-- START LOGO SECTION-->
             <section id="logo-section" class="text-center">
@@ -214,8 +211,6 @@
                 <div class="container">
                     <div class="row">
                         <div>
-                       
-                        <xxxform class="login">
                             <p>
                                 <span>Inloggen:</span> &nbsp;&nbsp
                                 Email: <input type="email" class="login-email">
@@ -224,11 +219,9 @@
                                 <span> of </span> &nbsp;&nbsp;&nbsp;
                                 <button type=button class="btn btn-social btn-facebook" onclick='loginNow("fb");'><i class="fa fa-facebook"></i>Inloggen</button>
                             </p>
-                        </xxxform>
 
                             <!-- <!-- WACHTWOORD ONDERHOUD -->
                             <div class="reset pull-right"><a href="../reset.html">Wachtwoord onderhoud</a></div> 
-
                         </div>
 
                         <div>
