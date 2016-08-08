@@ -34,6 +34,8 @@
         <script src="js/jqBootstrapValidation.js"></script>
         <script src="js/modernizr.custom.js"></script>
         <script src="js/script.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+        <script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
 
         <!-- IE specials --> 
         <!--[if lt IE 9]>
@@ -68,6 +70,46 @@
                       console.log('Error after menuItems', data);
                   }
               });
+            }
+            
+
+            // Set up Feathers client side
+            var host = 'http://localhost:3030';
+            var app = feathers()
+                .configure(feathers.rest(host).jquery(jQuery))
+                .configure(feathers.hooks())
+                .configure(feathers.authentication({
+                    //type: 'local'
+                    //storage: window.localStorage
+                }));
+
+
+            // Login function
+            function loginNow(loginType) {
+              
+              if (loginType == 'local') {
+                  app.authenticate({
+                      type: 'local',
+                     'email': $('input.login-email').val(),
+                     'password': $('input.login-password').val()
+                  }).then(function(result){
+                     console.log('Authenticated!', app.get('token'));
+                  }).catch(function(error){
+                     console.error('Error authenticating!', error);
+                  });
+              } else if (loginType == 'fb') {
+                  app.authenticate({
+                      type: 'facebook',
+                      facebook: {
+                        strategy: /*'FacebookStrategy'   //*/'passport-facebook'
+                      }
+                  }).then(function(result){
+                     console.log('Authenticated FB!', app.get('token'));
+                  }).catch(function(error){
+                     console.error('Error authenticating FB', error);
+                  });
+               
+              }
             }
         </script> 
 
@@ -176,15 +218,16 @@
             <div class="container">
                 <div class="row">
                     <div>
-                   
-                        <form class="login">
-                            <p><span>Inloggen:</span> &nbsp;&nbsp Email: <input type="email" name="loginemail">
-                               Wachtwoord: <input type="password" name="loginpassword"> &nbsp;&nbsp;&nbsp;
-                               <button type="submit" class="btn">Inloggen</button> &nbsp;&nbsp;&nbsp;
-                            <span> of </span> &nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i>Inloggen</button>
+                        <xform class="login">
+                            <p>
+                                <span>Inloggen:</span> &nbsp;&nbsp
+                                Email: <input type="email" class="login-email">
+                                Wachtwoord: <input type="password" class="login-password"> &nbsp;&nbsp;&nbsp;
+                                <button type="button" class="btn" onclick='loginNow("local");'>Inloggen</button> &nbsp;&nbsp;&nbsp;
+                                <span> of </span> &nbsp;&nbsp;&nbsp;
+                                <button type=button class="btn btn-social btn-facebook" onclick='loginNow("fb");'><i class="fa fa-facebook"></i>Inloggen</button>
                             </p>
-                        </form>
+                        </xform>
 
                         <!-- WACHTWOORD ONDERHOUD -->
                         <div class="reset pull-right"><a href="#reset-modal" data-toggle="modal">Wachtwoord onderhoud</a></div>

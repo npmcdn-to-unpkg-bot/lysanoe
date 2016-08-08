@@ -1,5 +1,7 @@
 'use strict';
 
+console.log('Starting server side Lysa Noe app');
+
 const path = require('path');
 const serveStatic = require('feathers').static;
 const favicon = require('serve-favicon');
@@ -7,6 +9,7 @@ const compress = require('compression');
 const cors = require('cors');
 const feathers = require('feathers');
 const configuration = require('feathers-configuration');
+const authentication = require('feathers-authentication');
 const hooks = require('feathers-hooks');
 const rest = require('feathers-rest');
 const bodyParser = require('body-parser');
@@ -17,6 +20,8 @@ const services = require('./services');
 const app = feathers();
 
 app.configure(configuration(path.join(__dirname, '..')));
+
+let configAuth = app.get('auth');
 
 app.use(compress())
   .options('*', cors())
@@ -29,6 +34,7 @@ app.use(compress())
   .configure(rest())
   .configure(socketio())
   .configure(services)
-  .configure(middleware);
+  .configure(middleware)
+  .configure(authentication());
   
 module.exports = app;

@@ -11,7 +11,8 @@ module.exports = function() {
   const app = this;
 
   let config = app.get('auth');
-  
+//console.log('configServer', config);
+
   config.facebook.strategy = FacebookStrategy;
   config.facebook.tokenStrategy = FacebookTokenStrategy;
   config.github.strategy = GithubStrategy;

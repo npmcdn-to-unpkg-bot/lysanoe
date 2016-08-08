@@ -12,9 +12,8 @@ PRIOs:
   - deploy vanaf github??? jacq wertk direct op server???
 - windows ftp-disk maken
 
-- menuItems service
-  * more than 5 items?
-  * sort on sequence?
+- authenticate & authorize
+- menuItems service: sort on sequence?
   
   
 
