@@ -1,9 +1,9 @@
-<!doctype html>
-<html>
-   <!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  
+
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="Lysa Noé" content="Website Lysa Noé">
@@ -23,11 +23,11 @@
         <!-- Custom CSS -->
         <link href="../css/style.css" rel="stylesheet">
 
+        <!-- Lightbox -->
+        <link href="../photo/css/lightbox.css" rel="stylesheet">
+
         <!-- Custom Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
-        <link href="css/main.css" rel="stylesheet">
 
 
         <!-- Template js -->
@@ -39,168 +39,227 @@
         <script src="../js/modernizr.custom.js"></script>
         <script src="../js/script.js"></script>
 
-
-
+      
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-    
-</head>
 
-<body>
 
-    <div class="container">
+  </head>
+
+  <body>
+
+  <div class="container">
 
         <!-- Close Cross -->
         <a href="../index.html">  <i class="close pull-right"></i></a>
         <!-- End Close Cross -->
 
-    <div class="col-md-12 title-box hidden-xs">
-        <h1 class="text-center">Foto's</h1>
-        <div class="jquery-script-ads" style="margin:30px auto;" align="center">
-            
-        </div>
-    </div>
-    <div class="carouselGallery-grid hidden-xs">
         <div class="row">
-            <div class="carouselGallery-col-60">
-                <div class="carouselGallery-col-1 carouselGallery-carousel" data-index="0" data-username="visitsweden" data-imagetext="Photographer: @conny_lundstrom
-                If you want to visit Sweden to watch and/or photograph the northern lights, Abisko is a great place to go. Although it's pretty common to see them anywhere in northern Sweden.
+            <div class="section-title text-center">
+                <h3>Foto's</h3>
+            </div>
+        </div>
 
-                Tag your photos with #visitsweden and #swedishmoments to get featured. //@deskriptiv" data-location="" data-likes="3144" data-imagepath="https://scontent.cdninstagram.com/hphotos-xtf1/t51.2885-15/s640x640/sh0.08/e35/12105099_1702415459987632_609795510_n.jpg" data-posturl="https://instagram.com/p/9_dViYwVWJ/" style="background-image:url(https://scontent.cdninstagram.com/hphotos-xtf1/t51.2885-15/s640x640/sh0.08/e35/12105099_1702415459987632_609795510_n.jpg);">
-                <div class="carouselGallery-item">
-                    <div class="carouselGallery-item-meta">
-                        <span class="carouselGallery-item-meta-user">
-                            @visitsweden
-                        </span>
-                        <span class="carouselGallery-item-meta-likes">
-                            <span class="icons icon-heart"></span>3144
-                        </span>
+  </div><!-- /.container -->
+
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            
+            <ul class="nav navbar-nav">
+              <!-- <li class="active"><a href="#">Foto Selecteren <span class="sr-only">(current)</span></a></li>
+              <li><a href="#">Actie</a></li> -->
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Foto Selecteren <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Geen foto's</a></li>
+                  <li><a href="#">Alle foto's</a></li>
+                  <li><a href="#">Laatste upload</a></li>
+                  <li><a href="#">Zichtbaar voor Publiek</a></li>
+                  <li><a href="#">Zichtbaar voor Vriend</a></li>
+                  <li><a href="#">Zichtbaar voor Kennis</a></li>
+                  <li><a href="#">Zichtbaar voor Familie</a></li>   
+                  <li><a href="#">Zichtbaar voor Administrator</a></li>
+                  <!-- <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">One more separated link</a></li> -->
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actie uitvoeren<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Maak zichtbaar voor Publiek</a></li>
+                  <li><a href="#">Maak zichtbaar voor Vriend</a></li>
+                  <li><a href="#">Maak zichtbaar voor Kennis</a></li>
+                  <li><a href="#">Maak zichtbaar voor Familie</a></li>
+                  <li><a href="#">Maak zichtbaar voor Administrator</a></li>
+                  <li><a href="#">Verplaatsen naar album</a></li>
+                  <li><a href="#">Kopieren naar album</a></li>
+                  <li><a href="#">Verwijderen</a></li>
+                 <!--  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">One more separated link</a></li> -->
+                </ul>
+              </li>
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Upload</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bewerken <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    
+    <section>
+
+      <div class="container">
+
+        <div role="tabpanel">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#alle" aria-controls="algemeen" role="tab" data-toggle="tab">Alle foto's</a></li>
+            <li role="presentation"><a href="#tekeningen" aria-controls="tekeningen" role="tab" data-toggle="tab">Tekeningen</a></li>
+            <li role="presentation"><a href="#algemeen" aria-controls="alle" role="tab" data-toggle="tab">Algemeen</a></li>
+            
+            </ul>
+
+            <br>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+              
+              <div role="tabpanel" class="tab-pane active" id="alle">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <a href="images/lysapop.jpg" data-lightbox="gallery" data-title="Lysa met pop"><img src="images/lysapop.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa met pop</div>
                     </div>
+                    <div class="col-md-3">
+                      <a href="images/marklysa.jpg" data-lightbox="gallery" data-title="Mark met Lysa"><img src="images/marklysa.jpg" class="img-thumbnail"></a>
+                      <div class="title">Mark met Lysa</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysametzonnebril.jpg" data-lightbox="gallery" data-title="Lysa met zonnebril"><img src="images/lysametzonnebril.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa met zonnebril</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysametzonnebril.jpg" data-lightbox="gallery" data-title="Lysa met zonnebril"><img src="images/lysametzonnebril.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa met zonnebril</div>
+                    </div>
+                  </div><!-- End row -->
+                  <div class="row">
+                    <div class="col-md-3">
+                      <a href="images/inauto.jpg" data-lightbox="gallery" data-title="Op vakantie"><img src="images/inauto.jpg" class="img-thumbnail"></a>
+                      <div class="title">Op vakantie</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysaslab.jpg" data-lightbox="gallery" data-title="Lysa met slab"><img src="images/lysaslab.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa met slab</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysanietblij.jpg" data-lightbox="gallery" data-title="Lysa niet blij"><img src="images/lysanietblij.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa niet blij</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysanietblij.jpg" data-lightbox="gallery" data-title="Lysa niet blij"><img src="images/lysanietblij.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa niet blij</div>
+                    </div>
+                  </div><!-- End row -->
+              </div>
+
+
+              <div role="tabpanel" class="tab-pane" id="tekeningen">
+                  <div class="row">
+                      <div class="col-md-3">
+                        <a href="images/lysapop.jpg" data-lightbox="gallery" data-title="Lysa met pop"><img src="images/lysapop.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa met pop</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/marklysa.jpg" data-lightbox="gallery" data-title="Mark met Lysa"><img src="images/marklysa.jpg" class="img-thumbnail"></a>
+                      <div class="title">Mark met Lysa</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysametzonnebril.jpg" data-lightbox="gallery" data-title="Lysa met zonnebril"><img src="images/lysametzonnebril.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa met zonnebril</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysametzonnebril.jpg" data-lightbox="gallery" data-title="Lysa met zonnebril"><img src="images/lysametzonnebril.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa met zonnebril</div>
+                    </div>
+                  </div><!-- End row -->
                 </div>
-            </div>
-            <div class="carouselGallery-col-1 carouselGallery-carousel" data-index="1" data-username="visitsweden" data-imagetext="Photographer: @s_gustavsson
-            Location: Gaperud, Värmland
-            Tag your photos with #visitsweden and #swedishmoments to get featured. //@deskriptiv" data-location="" data-likes="5094" data-imagepath="https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-15/s640x640/sh0.08/e35/12063148_865400153574109_1616517572_n.jpg" data-posturl="https://instagram.com/p/96UTFPwVaN/" style="background-image:url(https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-15/s640x640/sh0.08/e35/12063148_865400153574109_1616517572_n.jpg);">
-            <div class="carouselGallery-item">
-                <div class="carouselGallery-item-meta">
-                    <span class="carouselGallery-item-meta-user">
-                        @visitsweden
-                    </span>
-                    <span class="carouselGallery-item-meta-likes">
-                        <span class="icons icon-heart"></span>5094
-                    </span>
+
+                <div role="tabpanel" class="tab-pane" id="algemeen">
+                  <div class="row">
+                      <div class="col-md-3">
+                        <a href="images/inauto.jpg" data-lightbox="gallery" data-title="Op vakantie"><img src="images/inauto.jpg" class="img-thumbnail"></a>
+                      <div class="title">Op vakantie</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysaslab.jpg" data-lightbox="gallery" data-title="Lysa met slab"><img src="images/lysaslab.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa met slab</div>
+                    </div>
+                    <div class="col-md-3">
+                      <a href="images/lysanietblij.jpg" data-lightbox="gallery" data-title="Lysa niet blij"><img src="images/lysanietblij.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa niet blij</div>
+                    </div>
+                     <div class="col-md-3">
+                      <a href="images/lysanietblij.jpg" data-lightbox="gallery" data-title="Lysa niet blij"><img src="images/lysanietblij.jpg" class="img-thumbnail"></a>
+                      <div class="title">Lysa niet blij</div>
+                    </div>
+                  </div><!-- End row -->
                 </div>
-            </div>
-        </div>
-        <div class="carouselGallery-col-1 carouselGallery-carousel" data-index="2" data-username="visitsweden" data-imagetext="Photographer: @tannerstedtphotography
-        Location: Resmo
+              
+          </div><!-- End tab-content -->
 
-        A perfect place for stargazing.
-        Tag #visitsweden and #swedishmoments for a chance to get featured. //@deskriptiv" data-location="" data-likes="3939" data-imagepath="https://scontent.cdninstagram.com/hphotos-xtf1/t51.2885-15/s640x640/sh0.08/e35/11430374_1056756017709570_2070956869_n.jpg" data-posturl="https://instagram.com/p/92tWKsQVUN/" style="background-image:url(https://scontent.cdninstagram.com/hphotos-xtf1/t51.2885-15/s640x640/sh0.08/e35/11430374_1056756017709570_2070956869_n.jpg);">
-        <div class="carouselGallery-item">
-            <div class="carouselGallery-item-meta">
-                <span class="carouselGallery-item-meta-user">
-                    @visitsweden
-                </span>
-                <span class="carouselGallery-item-meta-likes">
-                    <span class="icons icon-heart"></span>3939
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="carouselGallery-col-1 carouselGallery-carousel" data-index="3" data-username="visitsweden" data-imagetext="Photographer: @plilja
-    Location: Kalvträsk
+        </div><!-- End role tabpanel -->
 
-    There are plenty of remote places to rest your soul in northern Sweden.
+        
+      </div><!-- End container -->
 
-    Tag your photos with #visitsweden and #swedishmoments to get featured. //@deskriptiv" data-location="" data-likes="4626" data-imagepath="https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-15/s640x640/sh0.08/e35/12071129_1629374350650201_324519876_n.jpg" data-posturl="https://instagram.com/p/91p1nGwVVP/" style="background-image:url(https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-15/s640x640/sh0.08/e35/12071129_1629374350650201_324519876_n.jpg);">
-    <div class="carouselGallery-item">
-        <div class="carouselGallery-item-meta">
-            <span class="carouselGallery-item-meta-user">
-                @visitsweden
-            </span>
-            <span class="carouselGallery-item-meta-likes">
-                <span class="icons icon-heart"></span>4626
-            </span>
-        </div>
-    </div>
-</div>
-<div class="carouselGallery-col-1 carouselGallery-carousel" data-index="4" data-username="visitsweden" data-imagetext="Photographer: @jeppe.gustafsson
-Location: Motala
-It won't be long until Sweden turns into a winter wonderland.
-Tag your photos with #visitsweden and #swedishmoments to get featured. //@deskriptiv" data-location="" data-likes="3652" data-imagepath="https://scontent.cdninstagram.com/hphotos-xap1/t51.2885-15/s640x640/sh0.08/e35/12139747_1014383458614485_66385837_n.jpg" data-posturl="https://instagram.com/p/9y6I2YwVb1/" style="background-image:url(https://scontent.cdninstagram.com/hphotos-xap1/t51.2885-15/s640x640/sh0.08/e35/12139747_1014383458614485_66385837_n.jpg);">
-<div class="carouselGallery-item">
-    <div class="carouselGallery-item-meta">
-        <span class="carouselGallery-item-meta-user">
-            @visitsweden
-        </span>
-        <span class="carouselGallery-item-meta-likes">
-            <span class="icons icon-heart"></span>3652
-        </span>
-    </div>
-</div>
-</div>
-<div class="carouselGallery-col-1 carouselGallery-carousel" data-index="5" data-username="visitsweden" data-imagetext="Photographer: @photobyqase
-Location: Farsta
-There's just something beautifully serene about Swedish autumn.
+    </section>
 
-Remember to tag #visitsweden and #swedishmoments to get featured. //@deskriptiv" data-location="" data-likes="5358" data-imagepath="https://scontent.cdninstagram.com/hphotos-xfp1/t51.2885-15/e35/p480x480/12063244_688230837980464_1380297987_n.jpg" data-posturl="https://instagram.com/p/9tuxNaQVUj/" style="background-image:url(https://scontent.cdninstagram.com/hphotos-xfp1/t51.2885-15/e35/p480x480/12063244_688230837980464_1380297987_n.jpg);">
-<div class="carouselGallery-item">
-    <div class="carouselGallery-item-meta">
-        <span class="carouselGallery-item-meta-user">
-            @visitsweden
-        </span>
-        <span class="carouselGallery-item-meta-likes">
-            <span class="icons icon-heart"></span>5358
-        </span>
-    </div>
-</div>
-</div>
-</div>
-<div class="carouselGallery-col-40">
-    <div class="carouselGallery-col-2 carouselGallery-carousel" data-index="6" data-username="visitsweden" data-imagetext="Photographer: @alexeliassonphoto
-    Location: Gamla stan
+    
 
-    If you ever visit Stockholm, you have to take a stroll in Gamla stan (Old town). It's like traveling back in time.
 
-    Tag your photos with #visitsweden and #swedishmoments to get featured. //@deskriptiv" data-location="" data-likes="4151" data-imagepath="https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/p480x480/11934815_763148837144267_1213235293_n.jpg" data-posturl="https://instagram.com/p/9slFueQVQz/" style="background-image:url(https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/p480x480/11934815_763148837144267_1213235293_n.jpg);">
-    <div class="carouselGallery-item">
-        <div class="carouselGallery-item-meta">
-            <span class="carouselGallery-item-meta-user">
-                @visitsweden
-            </span>
-            <span class="carouselGallery-item-meta-likes">
-                <span class="icons icon-heart"></span>4151
-            </span>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../js/bootstrap.min.js"></script>
 
-<script src="js/main.js"></script>
-<script type="text/javascript">
+     <!-- Lightbox -->
+    <script src="../photo/js/lightbox.js"></script>
 
-//   var _gaq = _gaq || [];
-//   _gaq.push(['_setAccount', 'UA-36251023-1']);
-//   _gaq.push(['_setDomainName', 'jqueryscript.net']);
-//   _gaq.push(['_trackPageview']);
-
-//   (function() {
-//     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-//     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-//     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-//   })();
-
-// </script>
-
-    </div><!-- End container -->
-
-</body>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
 </html>
-
-

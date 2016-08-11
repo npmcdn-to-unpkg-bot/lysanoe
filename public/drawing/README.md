@@ -1,33 +1,35 @@
-Sketchy
+html5-canvas-drawing-app
+========================
 
-Yan Cui
-theburningmonk@gmail.com
+Sketchpad app using html5 canvas to draw using touch or mouse, works on iOS, Android, Window Phone and browser.
+App uses touch events, MSPointer events and mouse events to support iOS, Android, Window Phone and desktop browser.
 
-2011-03-01
+### [Demo] (http://htmlpreview.github.io/?https://raw.githubusercontent.com/krisrak/html5-canvas-drawing-app/master/index_javascript.html) 
 
-INTRO:
+-
 
-This is a web app based on HTML5's canvas element that lets you draw on a canvas area with a number of different tools.
+#### [index_javascript.html] (https://github.com/krisrak/html5-canvas-drawing-app/blob/master/index_javascript.html)
 
-LIVE DEMO:
+Canvas drawing app implemented in javascript only - [Demo] (http://htmlpreview.github.io/?https://raw2.github.com/krisrak/html5-canvas-drawing-app/master/index_javascript.html)
 
-You can try the live demo at http://sketchy.theburningmonk.com or http://bit.ly/Y5IpST.
+-
 
-THIRD-PARTY LIBRARIES:
-* jQuery (in js/jquery)
-* Modernizr (in js/modernizr)
-* MooTools (in js/mootools)
-* ColorPicker (in js/colorpicker)
+#### [index_jQuery.html] (https://github.com/krisrak/html5-canvas-drawing-app/blob/master/index_jQuery.html)
 
-JAVASCRIPTS:
-* js/brushes.js: Defines all the brushes you can use in the app, including pencil, paint brush, etc.
+Canvas drawing app implemented with jQuery, notice that the _touch_ and _MSPointer_ events use event.originalEvent
 
-* js/canvas.js: Defines all the interations with the canvas, e.g. changing the current brush, or colour
+-
 
-* js/layout.js: Sets up the accordion and the event handler for the buttons, etc.
+#### [index_jQueryMobile.html] (https://github.com/krisrak/html5-canvas-drawing-app/blob/master/index_jQueryMobile.html)
 
-CSS:
-* main.css: This file contains all the CSS settings for the game
+Canvas drawing app implemented with jQuery Mobile for UI elements, other code same as index_jQuery.html
 
-HTML:
-* sketchy.html: This file contains all the HTML markup for the application
+-
+
+#### [index_cordova.html] (https://github.com/krisrak/html5-canvas-drawing-app/blob/master/index_cordova.html)
+
+Canvas drawing app with an additional feature to use device's accelerometer to draw by tilting the device in different direction, code same as index_jQueryMobile.html + Cordova's accelerometer implementation.
+
+-
+
+![alt tag](https://raw.github.com/krisrak/html5-canvas-drawing-app/master/screenshot.png)
