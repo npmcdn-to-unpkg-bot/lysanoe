@@ -4,8 +4,19 @@
 
 
 /**************GENERAL****************/
+html {
+  height: 100%;
+}
 
-body.home{
+
+body {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  outline: 0;
+}
+
+body.home {
+    height: 100%;
     background: url(../images/background.jpg) no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -97,14 +108,16 @@ fieldset[disabled] .btn-primary.active {
 .close {
   position: absolute;
   right: 32px;
-  top: 32px;
+  top: 20px;
   width: 32px;
   height: 32px;
   opacity: 0.3;
 }
+
 .close:hover {
   opacity: 1;
 }
+
 .close:before, .close:after {
   position: absolute;
   left: 15px;
@@ -113,12 +126,21 @@ fieldset[disabled] .btn-primary.active {
   width: 2px;
   background-color: #333;
 }
+
 .close:before {
   transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
 }
+
 .close:after {
   transform: rotate(-45deg);
+  -moz-transform: rotate(45deg);
+  /*-webkit-transform: rotate(45deg);*/
+  -ms-transform: rotate(45deg);
 }
+
 
 
 /**************SECTION TITLE SECTION****************/
@@ -246,57 +268,6 @@ fieldset[disabled] .btn-primary.active {
 }
 
 
-/**************MODAL SECTION****************/
-
-.section-modal .modal-content {
-    padding: 100px 0 !important;
-    min-height: 100%;
-    border: 0 !important;
-    border-radius: 0;
-    background-clip: border-box;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-    color: #888;
-    font-weight: 300;
-}
-
-
-.section-modal .close-modal {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    width: 75px;
-    height: 75px;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.section-modal .close-modal:hover {
-    opacity: .3;
-}
-
-.section-modal .close-modal .lr {
-    z-index: 1051;
-    width: 1px;
-    height: 75px;
-    margin-left: 35px;
-    background-color: #222;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
-.section-modal .close-modal .lr .rl {
-    z-index: 1052;
-    width: 1px;
-    height: 75px;
-    background-color: #222;
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-
 
 /**************UITNODIGING****************/
 img.uitnodiging.img-responsive {
@@ -382,8 +353,37 @@ img.uitnodiging.img-responsive {
 
 /**************PHOTO****************/
 
+section {
+  margin: 20px 0 20px 0;
+  padding: 30px 0 30px 0;
+}
 
+.title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
+/**GROTE FOTO SLIDER**/
+
+.lb-outerContainer {
+  height: 80% !important;
+  width: 80% !important;
+}
+
+.lightbox {
+  height: 100%;
+}
+
+#lightbox > div.lb-outerContainer > div > img {
+  margin: auto !important;
+  max-height: 100% !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+.lb-container {
+  height: 100%;
+}
 
 
 /**************MEDIA 320--991***************/
