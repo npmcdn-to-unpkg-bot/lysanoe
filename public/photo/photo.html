@@ -45,96 +45,212 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <script type="text/javascript">
+          
+            'use strict';
+        
+            var app;
+            var imageStore = '/imageStore/';
+          
+            // Things to do after the page loads
+            window.onload = function () {
+            
+                var currentAlbum;
+                
+                // Create all the album tabs
+                $.ajax({
+                    url:  '/getAlbums',
+                    success: function(data) {
+                        console.log('Success for getAlbums:', data);
+                        var shortName, longName, html, count;
+                        if (data) {
+                            if (data.data) data = data.data;
+                            
+                            // Generate an extra album 'all photos'
+                            data.push({shortName: '__allImages', longName: 'Alle Foto\'s'});
+                            
+                            count = 0;
+                            for (var index in data) {
+                              
+                                longName = data[index].longName;
+                                shortName = data[index].shortName;
+                                
+                                html = '<li role="presentation" class="' + (count++ ? '' : 'active') + '">';
+                                html +=     '<a href="#' + shortName + '" aria-controls="' + shortName + '" role="tab" data-toggle="tab"' +
+                                            ' onclick="getImagesForTab(\'' + shortName + '\');"' +
+                                            '>';
+                                html +=         longName;
+                                html +=     '</a>';
+                                html += '</li>';
+                                
+                                $('ul.nav-tabs:first').append(html);
+                            }
+                        }
+                    },
+                    error: function(data) {
+                        console.log('Error after getAlbums', data);
+                    }
+                });
+
+                // Create all the images
+                $.ajax({
+                    url:  '/getImages',
+                    success: function(data) {
+                        console.log('Success for getImages:', data);
+                        var caption, fileName, file, html, albums;
+                        if (data) {
+                            if (data.data) data = data.data;
+                            for (var index in data) {
+                              
+                                albums = data[index].albums;
+                                caption = data[index].caption;
+                                fileName = data[index].imageId.split('/').pop();
+                                file = imageStore + fileName;
+                              
+                                html = '<div class="col-md-3 fromImageStore">';
+                                html +=   '<a href="' + file + '" class=""' +
+                                          ' data-lightbox="gallery"' +
+                                          ' data-title="' + caption + '"';
+                                for (var aIndex in albums) {
+                                    html += ' data-album-' +  albums[aIndex];
+                                }
+                                html +=   '>';
+                                html +=     '<img src="' + file + '" class="img-thumbnail">';
+                                html +=   '</a>';
+                                html +=   '<div class="title">' + caption + '</div>'
+                                html += '</div>';
+                                
+                                $('div.tab-pane:first').find('div.row').append(html);
+                            }
+                            
+                            // Click the active tab to correctly fill the gallery
+                            $('ul.nav-tabs').find('li.active').find('a').click();
+                        }
+                    },
+                    error: function(data) {
+                        console.log('Error after getImages', data);
+                    }
+                });
+            }
+            
+            function getImagesForTab (albumName) {
+                // __allImages: alles
+                // andere album: alles naar temp, terug wat in album zit
+                
+                if (albumName) {
+                    if (albumName == '__allImages') {
+                        // Move everything from local storage to gallery
+                        $('div.localImageStore').find('a').parent().appendTo('div.imageGallery');
+                        
+                    } else {
+                        // Move all images to local storage
+                        $('div.imageGallery').find('div.fromImageStore').appendTo('div.localImageStore');
+                        
+                        // Move relevant images back
+                        $('div.localImageStore').find('a[data-album-' + albumName + ']').parent().appendTo('div.imageGallery');
+                    }
+                }
+            }
+    
+          // Set up Feathers client side
+          //var host = 'http://localhost:3030';
+          //app = feathers()
+          //    .configure(feathers.rest(host).jquery(jQuery))
+          //    .configure(feathers.hooks())
+          //    .configure(feathers.authentication({
+          //        //type: 'local'
+          //        //storage: window.localStorage
+          //    }));
+    
+        </script> 
 
   </head>
 
   <body>
 
-  <div class="container">
-
-        <!-- Close Cross -->
-        <a href="../index.html">  <i class="close pull-right"></i></a>
-        <!-- End Close Cross -->
-
-        <div class="row">
-            <div class="section-title text-center">
-                <h3>Foto's</h3>
-            </div>
-        </div>
-
-  </div><!-- /.container -->
-
-
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+      <div class="container">
+          <!-- Close Cross -->
+          <a href="../index.html">  <i class="close pull-right"></i></a>
+          <!-- End Close Cross -->
+  
+          <div class="row">
+              <div class="section-title text-center">
+                  <h3>Foto's</h3>
+              </div>
           </div>
+      </div><!-- /.container -->
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            
-            <ul class="nav navbar-nav">
-              <!-- <li class="active"><a href="#">Foto Selecteren <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Actie</a></li> -->
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Foto Selecteren <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Geen foto's</a></li>
-                  <li><a href="#">Alle foto's</a></li>
-                  <li><a href="#">Laatste upload</a></li>
-                  <li><a href="#">Zichtbaar voor Publiek</a></li>
-                  <li><a href="#">Zichtbaar voor Vriend</a></li>
-                  <li><a href="#">Zichtbaar voor Kennis</a></li>
-                  <li><a href="#">Zichtbaar voor Familie</a></li>   
-                  <li><a href="#">Zichtbaar voor Administrator</a></li>
-                  <!-- <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">One more separated link</a></li> -->
+
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+    
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                
+                <ul class="nav navbar-nav">
+                  <!-- <li class="active"><a href="#">Foto Selecteren <span class="sr-only">(current)</span></a></li>
+                  <li><a href="#">Actie</a></li> -->
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Foto Selecteren <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Geen foto's</a></li>
+                      <li><a href="#">Alle foto's</a></li>
+                      <li><a href="#">Laatste upload</a></li>
+                      <li><a href="#">Zichtbaar voor Publiek</a></li>
+                      <li><a href="#">Zichtbaar voor Vriend</a></li>
+                      <li><a href="#">Zichtbaar voor Kennis</a></li>
+                      <li><a href="#">Zichtbaar voor Familie</a></li>   
+                      <li><a href="#">Zichtbaar voor Administrator</a></li>
+                      <!-- <li role="separator" class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">One more separated link</a></li> -->
+                    </ul>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actie uitvoeren<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Maak zichtbaar voor Publiek</a></li>
+                      <li><a href="#">Maak zichtbaar voor Vriend</a></li>
+                      <li><a href="#">Maak zichtbaar voor Kennis</a></li>
+                      <li><a href="#">Maak zichtbaar voor Familie</a></li>
+                      <li><a href="#">Maak zichtbaar voor Administrator</a></li>
+                      <li><a href="#">Verplaatsen naar album</a></li>
+                      <li><a href="#">Kopieren naar album</a></li>
+                      <li><a href="#">Verwijderen</a></li>
+                     <!--  <li role="separator" class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">One more separated link</a></li> -->
+                    </ul>
+                  </li>
                 </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actie uitvoeren<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Maak zichtbaar voor Publiek</a></li>
-                  <li><a href="#">Maak zichtbaar voor Vriend</a></li>
-                  <li><a href="#">Maak zichtbaar voor Kennis</a></li>
-                  <li><a href="#">Maak zichtbaar voor Familie</a></li>
-                  <li><a href="#">Maak zichtbaar voor Administrator</a></li>
-                  <li><a href="#">Verplaatsen naar album</a></li>
-                  <li><a href="#">Kopieren naar album</a></li>
-                  <li><a href="#">Verwijderen</a></li>
-                 <!--  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">One more separated link</a></li> -->
+                
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#">Upload</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bewerken <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </li>
                 </ul>
-              </li>
-            </ul>
-            
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Upload</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bewerken <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+              </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+      </nav>
     
     <section>
 
@@ -142,12 +258,9 @@
 
         <div role="tabpanel">
 
-            <!-- Nav tabs -->
+            <!-- Navigational tabs -->
             <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#alle" aria-controls="algemeen" role="tab" data-toggle="tab">Alle foto's</a></li>
-            <li role="presentation"><a href="#tekeningen" aria-controls="tekeningen" role="tab" data-toggle="tab">Tekeningen</a></li>
-            <li role="presentation"><a href="#algemeen" aria-controls="alle" role="tab" data-toggle="tab">Algemeen</a></li>
-            
+                <!-- Add albums here -->
             </ul>
 
             <br>
@@ -156,46 +269,20 @@
           <div class="tab-content">
               
               <div role="tabpanel" class="tab-pane active" id="alle">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <a href="images/lysapop.jpg" data-lightbox="gallery" data-title="Lysa met pop"><img src="images/lysapop.jpg" class="img-thumbnail"></a>
-                      <div class="title">Lysa met pop</div>
-                    </div>
-                    <div class="col-md-3">
-                      <a href="images/marklysa.jpg" data-lightbox="gallery" data-title="Mark met Lysa"><img src="images/marklysa.jpg" class="img-thumbnail"></a>
-                      <div class="title">Mark met Lysa</div>
-                    </div>
-                    <div class="col-md-3">
-                      <a href="images/lysametzonnebril.jpg" data-lightbox="gallery" data-title="Lysa met zonnebril"><img src="images/lysametzonnebril.jpg" class="img-thumbnail"></a>
-                      <div class="title">Lysa met zonnebril</div>
-                    </div>
-                    <div class="col-md-3">
-                      <a href="images/lysametzonnebril.jpg" data-lightbox="gallery" data-title="Lysa met zonnebril"><img src="images/lysametzonnebril.jpg" class="img-thumbnail"></a>
-                      <div class="title">Lysa met zonnebril</div>
-                    </div>
-                  </div><!-- End row -->
-                  <div class="row">
-                    <div class="col-md-3">
-                      <a href="images/inauto.jpg" data-lightbox="gallery" data-title="Op vakantie"><img src="images/inauto.jpg" class="img-thumbnail"></a>
-                      <div class="title">Op vakantie</div>
-                    </div>
-                    <div class="col-md-3">
-                      <a href="images/lysaslab.jpg" data-lightbox="gallery" data-title="Lysa met slab"><img src="images/lysaslab.jpg" class="img-thumbnail"></a>
-                      <div class="title">Lysa met slab</div>
-                    </div>
-                    <div class="col-md-3">
-                      <a href="images/lysanietblij.jpg" data-lightbox="gallery" data-title="Lysa niet blij"><img src="images/lysanietblij.jpg" class="img-thumbnail"></a>
-                      <div class="title">Lysa niet blij</div>
-                    </div>
-                    <div class="col-md-3">
-                      <a href="images/lysanietblij.jpg" data-lightbox="gallery" data-title="Lysa niet blij"><img src="images/lysanietblij.jpg" class="img-thumbnail"></a>
-                      <div class="title">Lysa niet blij</div>
-                    </div>
+                  <div class="row imageGallery">
+                      <!-- Add images here -->
+                      
+                      <!--
+                          Q: images in 1 row ?
+                          Q: juiste syntax voor aria-controls=shortName in tab <a> ?
+                          Q: fix menu and tab rows ?
+                      -->
+                      
                   </div><!-- End row -->
               </div>
 
 
-              <div role="tabpanel" class="tab-pane" id="tekeningen">
+              <div role="tabpanel" class="tab-pane hide" id="tekeningen">
                   <div class="row">
                       <div class="col-md-3">
                         <a href="images/lysapop.jpg" data-lightbox="gallery" data-title="Lysa met pop"><img src="images/lysapop.jpg" class="img-thumbnail"></a>
@@ -216,7 +303,7 @@
                   </div><!-- End row -->
                 </div>
 
-                <div role="tabpanel" class="tab-pane" id="algemeen">
+                <div role="tabpanel" class="tab-pane hide" id="algemeen">
                   <div class="row">
                       <div class="col-md-3">
                         <a href="images/inauto.jpg" data-lightbox="gallery" data-title="Op vakantie"><img src="images/inauto.jpg" class="img-thumbnail"></a>
@@ -241,8 +328,10 @@
 
         </div><!-- End role tabpanel -->
 
-        
       </div><!-- End container -->
+      
+      <!-- Store images not being displayed for the current tab -->
+      <div class="localImageStore hide"></div>
 
     </section>
 

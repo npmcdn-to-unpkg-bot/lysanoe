@@ -6,14 +6,12 @@ BUGS:
 
 
 PRIOs:
-- how to deploy to aws:
-  - aws server updaten (node, feathers, mongo)
-  - daar app daaiend maken
-  - deploy vanaf github??? jacq wertk direct op server???
-- windows ftp-disk maken
 - authenticate & authorize
   * error in version 0.7.9 ? with variable app not being global?
 - menuItems service: sort on sequence?
+- photos
+  * fotos + album mechanisme
+  * menu acties op alle fotos
   
   
 

@@ -1,4 +1,6 @@
 'use strict';
+const getAlbums = require('./getAlbums');
+const getImage = require('./getImage');
 const menuItems = require('./menuItems');
 const authentication = require('./authentication');
 const user = require('./user');
@@ -13,5 +15,6 @@ module.exports = function() {
   app.configure(authentication);
   app.configure(user);
   app.configure(menuItems);
-
+  app.configure(getImage);
+  app.configure(getAlbums);
 };

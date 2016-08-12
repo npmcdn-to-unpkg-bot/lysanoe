@@ -44,36 +44,36 @@
         <script type="text/javascript">
           
             'use strict';
-          
+        
             var app;
-            
+          
             // Things to do after the page loads
             window.onload = function () {
-              
-              // Get the menu items: names, colours, links, etc
-              $.ajax({
-                  url:  'menuItems',
-                  success: function(data) {
-                      console.log('Success for menuItems:', data);
-                      var menuItem;
-                      if (data) {
-                          if (data.data) data = data.data;
-                          for (var index in data) {
-                              menuItem = $('.menu-item').eq(index);
-                              menuItem.css('background', data[index].colour);
-                              menuItem.find('a').attr('id', 'menu-btn-' + data[index].module);
-                              menuItem.find('a').attr('href', data[index].module + '/' + data[index].module + '.html');
-                              menuItem.find('i').attr('class', data[index].iconClass);
-                              menuItem.find('p').html(data[index].longName);
-                          }
-                      }
-                  },
-                  error: function(data) {
-                      console.log('Error after menuItems', data);
-                  }
-              });
+                
+                // Get the menu items: names, colours, links, etc
+                $.ajax({
+                    url:  'menuItems',
+                    success: function(data) {
+                        console.log('Success for menuItems:', data);
+                        var menuItem;
+                        if (data) {
+                            if (data.data) data = data.data;
+                            for (var index in data) {
+                                menuItem = $('.menu-item').eq(index);
+                                menuItem.css('background', data[index].colour);
+                                menuItem.find('a').attr('id', 'menu-btn-' + data[index].module);
+                                menuItem.find('a').attr('href', data[index].module + '/' + data[index].module + '.html');
+                                menuItem.find('i').attr('class', data[index].iconClass);
+                                menuItem.find('p').html(data[index].longName);
+                            }
+                        }
+                    },
+                    error: function(data) {
+                        console.log('Error after menuItems', data);
+                    }
+                });
             }
-
+  
             // Set up Feathers client side
             var host = 'http://localhost:3030';
             app = feathers()
@@ -83,7 +83,7 @@
                     //type: 'local'
                     //storage: window.localStorage
                 }));
-
+  
             // Login function
             function loginNow(loginType) {
               
@@ -98,6 +98,7 @@
                      console.error('Error authenticating!', error);
                   });
               } else if (loginType == 'fb') {
+                  // TODO: Why is facebook unknown here? 
                   app.authenticate({
                       type: 'facebook',
                       facebook: {
