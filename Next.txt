@@ -6,11 +6,11 @@ BUGS:
 
 
 PRIOs:
+- op chris server
+- 1e menu items: fotos, jarig, contact, blog opa, hallo
 - authenticate & authorize
   * error in version 0.7.9 ? with variable app not being global?
-- menuItems service: sort on sequence?
-- photos
-  * fotos + album mechanisme
+- menuItems service: sort on sequence?- photos
   * menu acties op alle fotos
   
   
