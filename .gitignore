@@ -28,7 +28,7 @@ node_modules
 .lock-wscript
 
 # Mac files
-.DS_store
+.DS_Store
 
 # Lysa Noe files
 start.sh
