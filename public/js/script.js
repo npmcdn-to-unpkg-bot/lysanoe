@@ -1,9 +1,6 @@
 var $ = jQuery.noConflict();
 
-
-
-// Progress Bar
-
+// Progress Barfor Introductin page
 $(document).ready(function ($) {
     "use strict";
     
@@ -12,15 +9,12 @@ $(document).ready(function ($) {
             $('.progress-bar').css('width',  function () { return ($(this).attr('data-percentage') + '%')});
         });
     }, {accY: -100});
-        
-        
 });
 
 //Owl Carousel
 $(document).ready(function() {
  
   $("#owl-demo").owlCarousel({
- 
       slideSpeed : 300,
       paginationSpeed : 400,
       singleItem:true
@@ -31,7 +25,5 @@ $(document).ready(function() {
       // itemsDesktopSmall : false,
       // itemsTablet: false,
       // itemsMobile : false
- 
   });
- 
 });

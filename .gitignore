@@ -29,6 +29,8 @@ node_modules
 
 # Mac files
 .DS_Store
+*/.DS_Store
+*/*/.DS_Store
 
 # Lysa Noe files
 start.sh
