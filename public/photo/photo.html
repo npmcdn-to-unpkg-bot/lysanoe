@@ -67,7 +67,7 @@
                             if (data.data) data = data.data;
                             
                             // Generate an extra album 'all photos'
-                            data.push({shortName: '__allImages', longName: 'Alle Foto\'s'});
+                            data.push({shortName: '__allImages', longName: 'Alles'});
                             
                             count = 0;
                             for (var index in data) {
@@ -75,15 +75,13 @@
                                 longName = data[index].longName;
                                 shortName = data[index].shortName;
                                 
-                                html = '<li role="presentation" class="' + (count++ ? '' : 'active') + '">';
-                                html +=     '<a href="#' + shortName + '" aria-controls="' + shortName + '" role="tab" data-toggle="tab"' +
-                                            ' onclick="getImagesForTab(\'' + shortName + '\');"' +
-                                            '>';
+                                html = '<li id="' + shortName + '" class="' + (count++ ? '' : 'active') + '">';
+                                html +=     '<a href="#" onclick="getImagesForTab(\'' + shortName + '\');return false;">';
                                 html +=         longName;
                                 html +=     '</a>';
                                 html += '</li>';
                                 
-                                $('ul.nav-tabs:first').append(html);
+                                $('ul.navbar-albums:first').append(html);
                             }
                         }
                     },
@@ -109,16 +107,16 @@
                               
                                 html = '<div class="col-md-3 fromImageStore">';
                                 html +=   '<div class="img-wrapper">';
-                                html +=   '<a href="' + file + '" class=""' +
-                                          ' data-lightbox="gallery"' +
-                                          ' data-title="' + caption + '"';
+                                html +=     '<a href="' + file + '" class=""' +
+                                            ' data-lightbox="gallery"' +
+                                            ' data-title="' + caption + '"';
                                 for (var aIndex in albums) {
                                     html += ' data-album-' +  albums[aIndex];
                                 }
-                                html +=   '>';
-                                html +=     '<img src="' + file + '" class="img-thumbnail">';
-                                html +=   '</a>';
-                                html +=   '<div class="title">' + caption + '</div>'
+                                html +=     '>';
+                                html +=       '<img src="' + file + '" class="img-thumbnail">';
+                                html +=     '</a>';
+                                html +=     '<div class="title">' + caption + '</div>'
                                 html +=   '</div>';
                                 html += '</div>';
                                 
@@ -126,7 +124,7 @@
                             }
                             
                             // Click the active tab to correctly fill the gallery
-                            $('ul.nav-tabs').find('li.active').find('a').click();
+                            $('ul.navbar-albums').find('li.active').find('a').click();
                         }
                     },
                     error: function(data) {
@@ -135,21 +133,25 @@
                 });
             }
             
+            // Fill the gallery with relevant images and update the album status to 'active'
+            // Uses a local DOM storage to store irrelevant images          
             function getImagesForTab (albumName) {
-                // __allImages: alles
-                // andere album: alles naar temp, terug wat in album zit
-                
                 if (albumName) {
+                    // Set the album name to 'active'
+                    $('ul.navbar-albums').find('li.active').removeClass('active');
+                    $('ul.navbar-albums').find('li#' + albumName).addClass('active');
+                    
+                    // Fill the gallery
                     if (albumName == '__allImages') {
                         // Move everything from local storage to gallery
-                        $('div.localImageStore').find('a').parent().appendTo('div.imageGallery');
+                        $('div.localImageStore').find('div.fromImageStore').appendTo('div.imageGallery');
                         
                     } else {
                         // Move all images to local storage
                         $('div.imageGallery').find('div.fromImageStore').appendTo('div.localImageStore');
                         
                         // Move relevant images back
-                        $('div.localImageStore').find('a[data-album-' + albumName + ']').parent().appendTo('div.imageGallery');
+                        $('div.localImageStore').find('a[data-album-' + albumName + ']').closest('div.fromImageStore').appendTo('div.imageGallery');
                     }
                 }
             }
@@ -202,10 +204,8 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2"> <!--  ID change to collapse-2 14/8/2016 -->         
-              <ul class="nav navbar-nav navbar-left">
-                <li><a href="#">Algemeen</a></li>
-                <li><a href="#">Tekeningen</a></li>
-                <li><a href="#">Alles</a></li>
+              <ul class="nav navbar-nav navbar-left navbar-albums">
+                <!-- Add the albums here -->
               </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
@@ -289,7 +289,6 @@
                 <div role="tabpanel" class="tab-pane active" id="alle">
                     <div class="row no-gutters imageGallery">
                         <!-- Add images here -->
-                        
                     </div><!-- End row -->
                 </div><!-- End tabpanel -->
 
