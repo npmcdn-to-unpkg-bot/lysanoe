@@ -45,266 +45,232 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script type="text/javascript">
-          
-            'use strict';
-        
-            var app;
-            var imageStore = '/imageStore/';
-          
-            // Things to do after the page loads
-            window.onload = function () {
-            
-                var currentAlbum;
-                
-                // Create all the album tabs
-                $.ajax({
-                    url:  '/getAlbums',
-                    success: function(data) {
-                        console.log('Success for getAlbums:', data);
-                        var shortName, longName, html, count;
-                        if (data) {
-                            if (data.data) data = data.data;
-                            
-                            // Generate an extra album 'all photos'
-                            data.push({shortName: '__allImages', longName: 'Alles'});
-                            
-                            count = 0;
-                            for (var index in data) {
-                              
-                                longName = data[index].longName;
-                                shortName = data[index].shortName;
-                                
-                                html = '<li id="' + shortName + '" class="' + (count++ ? '' : 'active') + '">';
-                                html +=     '<a href="#" onclick="getImagesForTab(\'' + shortName + '\');return false;">';
-                                html +=         longName;
-                                html +=     '</a>';
-                                html += '</li>';
-                                
-                                $('ul.navbar-albums:first').append(html);
-                            }
-                        }
-                    },
-                    error: function(data) {
-                        console.log('Error after getAlbums', data);
-                    }
-                });
-
-                // Create all the images
-                $.ajax({
-                    url:  '/getImages',
-                    success: function(data) {
-                        console.log('Success for getImages:', data);
-                        var caption, fileName, file, html, albums;
-                        if (data) {
-                            if (data.data) data = data.data;
-                            for (var index in data) {
-                              
-                                albums = data[index].albums;
-                                caption = data[index].caption;
-                                fileName = data[index].imageId.split('/').pop();
-                                file = imageStore + fileName;
-                              
-                                html = '<div class="col-md-3 fromImageStore">';
-                                html +=   '<div class="img-wrapper">';
-                                html +=     '<a href="' + file + '" class=""' +
-                                            ' data-lightbox="gallery"' +
-                                            ' data-title="' + caption + '"';
-                                for (var aIndex in albums) {
-                                    html += ' data-album-' +  albums[aIndex];
-                                }
-                                html +=     '>';
-                                html +=       '<img src="' + file + '" class="img-thumbnail">';
-                                html +=     '</a>';
-                                html +=     '<div class="title">' + caption + '</div>'
-                                html +=   '</div>';
-                                html += '</div>';
-                                
-                                $('div.tab-pane:first').find('div.row').append(html);
-                            }
-                            
-                            // Click the active tab to correctly fill the gallery
-                            $('ul.navbar-albums').find('li.active').find('a').click();
-                        }
-                    },
-                    error: function(data) {
-                        console.log('Error after getImages', data);
-                    }
-                });
-            }
-            
-            // Fill the gallery with relevant images and update the album status to 'active'
-            // Uses a local DOM storage to store irrelevant images          
-            function getImagesForTab (albumName) {
-                if (albumName) {
-                    // Set the album name to 'active'
-                    $('ul.navbar-albums').find('li.active').removeClass('active');
-                    $('ul.navbar-albums').find('li#' + albumName).addClass('active');
-                    
-                    // Fill the gallery
-                    if (albumName == '__allImages') {
-                        // Move everything from local storage to gallery
-                        $('div.localImageStore').find('div.fromImageStore').appendTo('div.imageGallery');
-                        
-                    } else {
-                        // Move all images to local storage
-                        $('div.imageGallery').find('div.fromImageStore').appendTo('div.localImageStore');
-                        
-                        // Move relevant images back
-                        $('div.localImageStore').find('a[data-album-' + albumName + ']').closest('div.fromImageStore').appendTo('div.imageGallery');
-                    }
-                }
-            }
-    
-          // Set up Feathers client side
-          //var host = 'http://localhost:3030';
-          //app = feathers()
-          //    .configure(feathers.rest(host).jquery(jQuery))
-          //    .configure(feathers.hooks())
-          //    .configure(feathers.authentication({
-          //        //type: 'local'
-          //        //storage: window.localStorage
-          //    }));
-    
-        </script> 
 
   </head>
 
   <body class="photo">
 
-
-      <div class="container">          
-          <div class="row">
-              <div class="section-title text-center">
-                  <h3>Foto's</h3>
-              </div>
-          </div>
+      <div class="container">
+            <div class="row">
+                <div class="section-title text-center">
+                    <h3>Foto's</h3>
+                </div>
+            </div>
       </div><!-- /.container -->
 
-      <!-- NAVBAR TOP -->
+         
+                <!-- NAVBAR TOP -->
 
-      <!-- Album tabs 14/8/2016-->
+                <!-- Album tabs -->
 
-      <nav class="navbar navbar-default navbar-fixed-top"> <!-- Fixed bottom 14/8/2016 -->
-        <div class="container-fluid">
+                <nav class="navbar navbar-default navbar-fixed-top"> 
+                  <div class="container-fluid">
 
-            <!-- Close Cross --> <!-- Moved under navbar-fixed-top 14/8/2016 -->
-            <a href="../index.html">  <i class="close pull-right"></i></a>
-            <!-- End Close Cross -->
+                      <!-- Close Cross --> 
+                      <a href="../index.html">  <i class="close pull-right"></i></a>
+                      <!-- End Close Cross -->
 
-        <!-- Toggle minimized button mobile devices Albums -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false"> <!-- data-target change to collapse-2 14/8/2016 -->
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-            </div>
+                  <!-- Toggle minimized button mobile devices Albums -->
+                      <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false"> <!-- data-target change to collapse-2 14/8/2016 -->
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                      </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2"> <!--  ID change to collapse-2 14/8/2016 -->         
-              <ul class="nav navbar-nav navbar-left navbar-albums">
-                <!-- Add the albums here -->
-              </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+                      <!-- Collect Albums -->
+                      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2"> <!--  ID change to collapse-2 14/8/2016 -->         
+                        <ul class="nav navbar-nav navbar-left">
+                          <li><a href="#">Algemeen</a></li>
+                          <li><a href="#">Tekeningen</a></li>
+                          <li><a href="#">Alles</a></li>
+                        </ul>
+                      </div><!-- /.navbar-collapse -->
+                  </div><!-- /.container-fluid -->
 
-      </nav> <!-- END NAVBAR TOP -->
+                </nav> <!-- END NAVBAR TOP -->
 
-      <nav class="navbar navbar-default navbar-fixed-bottom">
-          <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-              </div>
-    
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                
-                <ul class="nav navbar-nav">
-                  <!-- <li class="active"><a href="#">Foto Selecteren <span class="sr-only">(current)</span></a></li>
-                  <li><a href="#">Actie</a></li> -->
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Foto Selecteren <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Geen foto's</a></li>
-                      <li><a href="#">Alle foto's</a></li>
-                      <li><a href="#">Laatste upload</a></li>
-                      <li><a href="#">Zichtbaar voor Publiek</a></li>
-                      <li><a href="#">Zichtbaar voor Vriend</a></li>
-                      <li><a href="#">Zichtbaar voor Kennis</a></li>
-                      <li><a href="#">Zichtbaar voor Familie</a></li>   
-                      <li><a href="#">Zichtbaar voor Administrator</a></li>
-                      <!-- <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">One more separated link</a></li> -->
+                <section><!-- START GALLERY -->
+
+                <div class="container">
+                        
+                  <div role="tabpanel">
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        
+                        <div role="tabpanel" class="tab-pane active" id="alle">
+
+                            <div class="row no-gutters">
+
+                                <div class="col-md-3">
+                                  <div class="img-wrapper">                            
+                                    <a href="images/lysapop.jpg" data-lightbox="gallery" data-title="Lysa met pop"><img src="images/lysapop.jpg" class="img-responsive"></a><!-- Change img-thumbnail into img-responsive 14/8/2016 -->
+                                    <!-- <div class="caption"><p>Lysa met pop</p></div> -->
+                                    <div class = "checkbox"><!-- Added checkbox and caption 14/8/2016 -->
+                                      <label class="caption"><input type = "checkbox"><p>Lysa met pop</p></label>
+                                    </div>                                 
+                                  </div>
+
+                                </div>                      
+                          
+                                <div class="col-md-3">
+                                  <div class="img-wrapper">
+                                    <a href="images/marklysa.jpg" data-lightbox="gallery" data-title="Mark met Lysa"><img src="images/marklysa.jpg" class="img-responsive"></a>
+                                    <div class = "checkbox">
+                                      <label class="caption"><input type = "checkbox"><p>Mark met Lysa</p></label>
+                                    </div>    
+                                  </div><!-- End img-wrapper -->
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="img-wrapper">
+                                    <a href="images/lysametzonnebril.jpg" data-lightbox="gallery" data-title="Lysa met zonnebril"><img src="images/lysametzonnebril.jpg" class="img-responsive"></a>
+                                    <div class = "checkbox">
+                                      <label class="caption"><input type = "checkbox"><p>Lysa met zonnebril</p></label>
+                                    </div> 
+                                  </div><!-- End img-wrapper -->
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="img-wrapper">
+                                    <a href="images/lysametzonnebril.jpg" data-lightbox="gallery" data-title="Lysa met zonnebril"><img src="images/lysametzonnebril.jpg" class="img-responsive "></a>
+                                    <div class = "checkbox">
+                                      <label class="caption"><input type = "checkbox"><p>Lysa met zonnebril 2</p></label>
+                                    </div> 
+                                  </div><!-- End img-wrapper -->
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="img-wrapper">
+                                    <a href="images/inauto.jpg" data-lightbox="gallery" data-title="Op vakantie"><img src="images/inauto.jpg" class="img-responsive"></a>
+                                    <div class = "checkbox">
+                                      <label class="caption"><input type = "checkbox"><p>In de auto</p></label>
+                                    </div> 
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="img-wrapper">
+                                    <a href="images/lysaslab.jpg" data-lightbox="gallery" data-title="Lysa met slab"><img src="images/lysaslab.jpg" class="img-responsive"></a>
+                                    <div class = "checkbox">
+                                      <label class="caption"><input type = "checkbox"><p>Lysa met slab</p></label>
+                                    </div> 
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="img-wrapper">
+                                    <a href="images/lysanietblij.jpg" data-lightbox="gallery" data-title="Lysa niet blij"><img src="images/lysanietblij.jpg" class="img-responsive"></a>
+                                    <div class = "checkbox">
+                                      <label class="caption"><input type = "checkbox"><p>Lysa niet blij</p></label>
+                                    </div> 
+                                  </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <div class="img-wrapper">
+                                    <a href="images/lysanietblij.jpg" data-lightbox="gallery" data-title="Lysa niet blij"><img src="images/lysanietblij.jpg" class="img-responsive"></a>
+                                    <div class = "checkbox">
+                                      <label class="caption"><input type = "checkbox"><p>Lysa niet meer blij</p></label>
+                                    </div> 
+                                </div>
+                              </div>
+
+                            </div><!-- End row no-gutters-->
+
+                        </div><!-- End tab-panel -->
+                        
+                    </div><!-- End tab-content -->
+
+                  </div> <!-- End Tab-panel -->
+               
+                </div><!-- End container -->
+
+                </section><!-- END GALLERY -->
+
+
+            <!-- NAVBAR BOTTOM -->
+
+            <nav class="navbar navbar-default navbar-fixed-bottom"> 
+              <div class="container-fluid">
+              <!-- Toggle minimized button mobile devices upload/edit/copy -->
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                  </div>
+
+                  <!-- Collect targets to upload/edit/copy -->
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    
+                    <ul class="nav navbar-nav">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Foto Selecteren <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Geen foto's</a></li>
+                          <li><a href="#">Alle foto's</a></li>
+                          <li><a href="#">Laatste upload</a></li>
+                          <li><a href="#">Zichtbaar voor Publiek</a></li>
+                          <li><a href="#">Zichtbaar voor Vriend</a></li>
+                          <li><a href="#">Zichtbaar voor Kennis</a></li>
+                          <li><a href="#">Zichtbaar voor Familie</a></li>   
+                          <li><a href="#">Zichtbaar voor Administrator</a></li>
+                        </ul>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zichtbaarheid vastleggen<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Maak zichtbaar voor Publiek</a></li>
+                          <li><a href="#">Maak zichtbaar voor Vriend</a></li>
+                          <li><a href="#">Maak zichtbaar voor Kennis</a></li>
+                          <li><a href="#">Maak zichtbaar voor Familie</a></li>
+                          <li><a href="#">Maak zichtbaar voor Administrator</a></li>
+                          <li><a href="#">Verplaatsen naar album</a></li>
+                          <li><a href="#">Kopieren naar album</a></li>
+                          <li><a href="#">Verwijderen</a></li>
+                        </ul>
+                      </li>
                     </ul>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actie uitvoeren<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Maak zichtbaar voor Publiek</a></li>
-                      <li><a href="#">Maak zichtbaar voor Vriend</a></li>
-                      <li><a href="#">Maak zichtbaar voor Kennis</a></li>
-                      <li><a href="#">Maak zichtbaar voor Familie</a></li>
-                      <li><a href="#">Maak zichtbaar voor Administrator</a></li>
-                      <li><a href="#">Verplaatsen naar album</a></li>
-                      <li><a href="#">Kopieren naar album</a></li>
-                      <li><a href="#">Verwijderen</a></li>
-                     <!--  <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">One more separated link</a></li> -->
-                    </ul>
-                  </li>
-                </ul>
-                
-                <ul class="nav navbar-nav navbar-left"> <!-- Added icons 14/8/2016 -->
+                    
+                    <ul class="nav navbar-nav navbar-left"> <!-- Icons added 14/8/2016 -->
                       <li><a href="#" data-toggle="tooltip" title="Kopieren"><i class="fa fa-copy"></i></a></li>
                       <li><a href="#" data-toggle="tooltip" title="Verplaatsen"><i class="fa fa-clipboard"></i></a></li>
                       <li><a href="#" data-toggle="tooltip" title="Verwijderen"><i class="fa fa-trash"></i></a></li>
-                      <li><a href="#" data-toggle="tooltip" title="Upload"><i class="fa fa-upload"></i></a></li>
                       <li><a href="#" data-toggle="tooltip" title="Download"><i class="fa fa-download"></i></a></li>
+                      <li><a href="myModal" data-toggle="modal" data-target="#myModal" title="Upload"><i class="fa fa-upload"></i></a></li>
                     </ul>
-              </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-      </nav>
-    
-    <section><!-- Start Gallery -->
+                      
 
-      <div class="container">
-
-        <div role="tabpanel">
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                
-                <div role="tabpanel" class="tab-pane active" id="alle">
-                    <div class="row no-gutters imageGallery">
-                        <!-- Add images here -->
-                    </div><!-- End row -->
-                </div><!-- End tabpanel -->
-
-            </div><!-- End tab-content -->
-
-        </div><!-- End role tabpanel -->
-
-      </div><!-- End container -->
-      
-      <!-- Store images not being displayed for the current tab -->
-      <div class="localImageStore hide"></div>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
 
 
-    </section>
+            <!-- Button trigger modal --><!-- Modal added 14/8/2016 -->
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="closed pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Upload bestanden</h4>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    
+
+
+                      
+         
+  
 
 
     <!-- Bootstrap core JavaScript
@@ -312,7 +278,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
      <!-- Lightbox -->
     <script src="../photo/js/lightbox.js"></script>
