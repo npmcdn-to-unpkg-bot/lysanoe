@@ -24,15 +24,8 @@
         <!-- Custom CSS -->
         <link href="../css/style.css" rel="stylesheet">
 
-        <!-- Lightbox -->
-        <link href="../photo/css/lightbox.css" rel="stylesheet">
-
         <!-- Custom Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-
-        <!--Dropzone -->
-        <link rel="stylesheet" href="../dropzone/dropzone.css">
-        <script src="../dropzone/dropzone.js"></script>
 
         <!-- Sockets -->  
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -46,7 +39,13 @@
         <script src="../js/modernizr.custom.js"></script>
         <script src="../js/script.js"></script>
 
-      
+         <!-- Lightbox -->
+        <link href="../photo/css/lightbox.css" rel="stylesheet">
+
+        <!--Dropzone -->
+        <link rel="stylesheet" href="../dropzone/dropzone.css">
+        <script src="../dropzone/dropzone.js"></script>
+    
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -121,9 +120,11 @@
                                     html += ' data-album-' +  albums[aIndex];
                                 }
                                 html +=     '>';
-                                html +=       '<img src="' + file + '" class="img-thumbnail">';
+                                html +=       '<img src="' + file + '" class="img-responsive">';
                                 html +=     '</a>';
-                                html +=     '<div class="title">' + caption + '</div>'
+                                html +=     '<div class = "checkbox">';
+                                html +=       '<label class="caption"><input type="checkbox"><p>' + caption + '</p></label>';
+                                html +=     '</div>';                                 
                                 html +=   '</div>';
                                 html += '</div>';
                                 
@@ -186,8 +187,6 @@
                     });
                 }
             };
-
- 
  
           // Set up Feathers client side
           //var host = 'http://localhost:3030';
@@ -200,37 +199,35 @@
           //    }));
     
         </script> 
-
   </head>
 
   <body class="photo">
 
-
-      <div class="container">          
-          <div class="row">
-              <div class="section-title text-center">
-                  <h3>Foto's</h3>
-              </div>
-          </div>
+      <div class="container">
+            <div class="row">
+                <div class="section-title text-center">
+                    <h3>Foto's</h3>
+                </div>
+            </div>
       </div><!-- /.container -->
 
       <!-- NAVBAR TOP met albums -->
-      <nav class="navbar navbar-default navbar-fixed-top"> <!-- Fixed bottom 14/8/2016 -->
+      <nav class="navbar navbar-default navbar-fixed-top"> 
         <div class="container-fluid">
 
-            <!-- Close Cross --> <!-- Moved under navbar-fixed-top 14/8/2016 -->
-            <a href="../index.html">  <i class="close pull-right"></i></a>
-            <!-- End Close Cross -->
+                      <!-- Close Cross --> 
+                      <a href="../index.html">  <i class="close pull-right"></i></a>
+                      <!-- End Close Cross -->
 
-        <!-- Toggle minimized button mobile devices Albums -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false"> <!-- data-target change to collapse-2 14/8/2016 -->
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-            </div>
+                  <!-- Toggle minimized button mobile devices Albums -->
+                      <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false"> <!-- data-target change to collapse-2 14/8/2016 -->
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                      </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2"> <!--  ID change to collapse-2 14/8/2016 -->         
@@ -311,42 +308,32 @@
  
     <!-- START GALLERY -->
     <section>
-
-      <div class="container">
-
-        <div role="tabpanel">
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                
-                <div role="tabpanel" class="tab-pane active" id="alle">
-                    <div class="row no-gutters imageGallery">
-                        <!-- Add images here -->
-                    </div><!-- End row -->
-                </div><!-- End tabpanel -->
-
-            </div><!-- End tab-content -->
-
-        </div><!-- End role tabpanel -->
-
-      </div><!-- End container -->
-      
-      <!-- Store images not being displayed for the current tab -->
-      <div class="localImageStore hide"></div>
-
-    </section><!-- END OF GALLERY -->
+        <div class="container">
+          <div role="tabpanel">
+              <!-- Tab panes -->
+              <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="alle">
+                      <div class="row no-gutters imageGallery">
+                          <!-- Add images here -->
+                      </div><!-- End row -->
+                  </div><!-- End row no-gutters-->
+              </div><!-- End tab-panel -->
+          </div> <!-- End Tab-panel -->
+        </div><!-- End container -->
+        
+        <!-- Store images not being displayed for the current tab -->
+        <div class="localImageStore hide"></div>
+   </section><!-- END GALLERY -->
 
     <!-- Modals section
     ================================================== -->
     <!-- Modal for file upload -->
-    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <!--<span aria-hidden="true">&times;</span>-->
-              </button>
-              <h4 class="modal-title" id="myModalLabel">Foto's uploaden</h4>
+            <button type="button" class="closed pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Upload bestanden</h4>
           </div>
           <div class="modal-body">
               Sleep je foto's hier naar toe
@@ -355,7 +342,7 @@
                 id="my-awesome-dropzone"></form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
@@ -365,11 +352,11 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
+    <!--<script src="../js/bootstrap.min.js"></script>-->
 
-     <!-- Lightbox -->
+    <!-- Lightbox. Leave this at the botom of the file! -->
     <script src="../photo/js/lightbox.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

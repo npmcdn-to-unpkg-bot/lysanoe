@@ -377,26 +377,32 @@ body.photo {
 
 .row.no-gutters > [class^="col-"],
 .row.no-gutters > [class*=" col-"] {
-  padding-right: 0;
-  padding-left: 0;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-bottom: 2px;
+  padding-top: 2px;
 }
 
-/*img {
-  max-width: 100%;
-}*/
-
-.img-wrapper img {
-  max-width: 100%;
-  height: auto;
-  margin: auto;
-}
 
 .img-wrapper {
   width: 100%;
   height: 400px;
-  overflow: hidden;
- 
+  background-color: #f8f8f8;
 }
+
+.img-wrapper .img-responsive {
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+}
+
+.img-wrapper .checkbox {
+  position: relative;
+  left: 15%;
+  bottom: 10%;
+  color: #ccc;
+}
+
 
 /**PHOTO GROTE FOTO SLIDER**/
 
