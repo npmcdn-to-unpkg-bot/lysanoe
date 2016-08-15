@@ -113,7 +113,7 @@
                               
                                 html = '<div class="col-md-3 fromImageStore">';
                                 html +=   '<div class="img-wrapper">';
-                                html +=     '<a href="' + file + '" class=""' +
+                                html +=     '<a href="' + file + '" class="image-gallery"' +
                                             ' data-lightbox="gallery"' +
                                             ' data-title="' + caption + '"';
                                 for (var aIndex in albums) {
@@ -122,7 +122,7 @@
                                 html +=     '>';
                                 html +=       '<img src="' + file + '" class="img-responsive">';
                                 html +=     '</a>';
-                                html +=     '<div class = "checkbox">';
+                                html +=     '<div class = "checkbox hide">';
                                 html +=       '<label class="caption"><input type="checkbox"><p>' + caption + '</p></label>';
                                 html +=     '</div>';                                 
                                 html +=   '</div>';
@@ -131,6 +131,17 @@
                                 $('div.tab-pane:first').find('div.row').append(html);
                             }
                             
+                            $('div.img-wrapper').hover(function(event){
+								if (event.type == 'mouseenter') {
+									$(this).find('div.checkbox').removeClass('hide');
+								} else {
+									console.log('THIS',$(this).find('input[type="checkbox"]').prop('checked'));
+									if (!$(this).find('input[type="checkbox"]').prop('checked')) {
+										$(this).find('div.checkbox').addClass('hide');
+									}
+								}
+                            });
+
                             // Click the active tab to correctly fill the gallery
                             $('ul.navbar-albums').find('li.active').find('a').click();
                         }
