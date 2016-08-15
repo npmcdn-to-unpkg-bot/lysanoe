@@ -1,4 +1,5 @@
 'use strict';
+const uploadImages = require('./uploadImages');
 const getAlbums = require('./getAlbums');
 const getImage = require('./getImage');
 const menuItems = require('./menuItems');
@@ -17,4 +18,5 @@ module.exports = function() {
   app.configure(menuItems);
   app.configure(getImage);
   app.configure(getAlbums);
+  app.configure(uploadImages);
 };

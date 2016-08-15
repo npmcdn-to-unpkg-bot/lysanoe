@@ -16,6 +16,18 @@ const bodyParser = require('body-parser');
 const socketio = require('feathers-socketio');
 const middleware = require('./middleware');
 const services = require('./services');
+const handler = require('feathers-errors/handler');
+//const multer = require('multer');
+//const multipartMiddleware = multer();
+//const dauria = require('dauria');
+//
+//// feathers-blob service
+//const blobService = require('feathers-blob');
+//// Here we initialize a FileSystem storage,
+//// but you can use feathers-blob with any other
+//// storage service like AWS or Google Drive.
+//const fs = require('fs-blob-store');
+//const blobStorage = fs(__dirname + '/imageStore');
 
 const app = feathers();
 
@@ -36,5 +48,8 @@ app.use(compress())
   .configure(services)
   .configure(middleware)
   .configure(authentication());
+  
+// Register a nicer error handler than the default Express one
+app.use(handler());
   
 module.exports = app;

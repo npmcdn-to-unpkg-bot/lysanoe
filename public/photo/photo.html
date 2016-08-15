@@ -170,7 +170,7 @@
             app = feathers()
                 .configure(feathers.hooks())
                 .configure(feathers.socketio(socket));
-            const uploadService = app.service('uploads');
+            const uploadService = app.service('uploadImages');
 
             // Event on file received
             uploadService.on('created', function(file){
@@ -178,7 +178,7 @@
             });
 
             // Initialise DropZone
-            Dropzone.options.photosUploadDropzone = {
+            Dropzone.options.imagesUploadDropzone = {
                 paramName: "uri",
                 uploadMultiple: false,
                 init: function(){
@@ -337,7 +337,7 @@
           </div>
           <div class="modal-body">
               Sleep je foto's hier naar toe
-              <form action="/uploads"
+              <form action="/uploadImages"
                 class="dropzone"
                 id="my-awesome-dropzone"></form>
           </div>

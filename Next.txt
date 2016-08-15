@@ -8,11 +8,15 @@ BUGS:
 PRIOs:
 - authenticate & authorize
   * error in version 0.7.9 ? with variable app not being global?
-- menuItems service: sort on sequence?- photos
-  * menu acties op alle fotos
-  
-  
-
+- photos
+  * upload server side ->
+    - give message back to the client,
+    - add to database,
+    - pre/post processing: file types/size/authorisation,
+    - clean up all unused libraries
+  * photo van mobiel using html5 tag ??
+  * checkbox + caption on hover
+- videos ??
 
 - Install imagemagick on aws server
   * then test foto turn and save
