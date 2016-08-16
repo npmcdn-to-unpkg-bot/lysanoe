@@ -34,9 +34,9 @@
         <script src="../js/jquery-2.1.1.min.js"></script>
         <script src="../bootstrap/js/bootstrap.min.js"></script>
         <script src="../js/jquery.appear.js"></script>
-        <script src="../js/contact_me.js"></script>
-        <script src="../js/jqBootstrapValidation.js"></script>
-        <script src="../js/modernizr.custom.js"></script>
+        <!--<script src="../js/contact_me.js"></script>-->
+        <!--<script src="../js/jqBootstrapValidation.js"></script>-->
+        <!--<script src="../js/modernizr.custom.js"></script>-->
         <script src="../js/script.js"></script>
 
          <!-- Lightbox -->
@@ -152,6 +152,12 @@
                         console.log('Error after getImages', data);
                     }
                 });
+            
+                // Click event to take a photo
+                $('i.take-photo').click(function(){
+                    $('form#take-photo-form').toggle();  
+                });
+            
             }
             
             // Fill the gallery with relevant images and update the album status to 'active'
@@ -219,8 +225,13 @@
       <div class="container">
             <div class="row">
                 <div class="section-title text-center">
-                    <h3>Foto's</h3>
+                    <h3>Foto's <i class='fa fa-camera take-photo'></i></h3>
                 </div>
+                <form id="take-photo-form" style="display:none;"
+                      method="post" action="/uploadImages" name="files" enctype="multipart/form-data" >
+                   <input type="file" accept="image/*;capture=camera" style="display: inline-block;" name="file">
+                   <button type='submit'>OK</button>
+               </form>
             </div>
       </div><!-- /.container -->
 

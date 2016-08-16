@@ -16,35 +16,42 @@ module.exports = function() {
   app.post('/uploadImages', function(req, res) {
       //console.log('REQST', req.files, process.cwd(), process.env.user );
       
-      var fileName = req.files.file.name;
-
-      // Move the file to the images store
-      req.files.file.mv(process.cwd() + '/public/imageStore/' + fileName, function(err){
-          if (err) {
-              console.log('Move image callback error:', err, fileName);  
-              res.status(500).send()
-          } else {
-              console.log('File uploaded:', fileName);
-              
-              // Update the database
-              imagesInfoService.create({
-                  imageId: fileName,
-                  caption: fileName,
-                  lastUpload: 1,
-                  isOriginal: 1,
-                  albums: ['__general'],
-                  inSlider: 0,
-                  visibility: 0 
-              }).then(function(data){
-                  console.log('Result of save to db:', data._id, data.imageId, data.createdAt);
-                  res.status(200).send({
-                      status: 200,
-                      _id: data._id,
-                      text: 'File \'' + data.imageId + '\' saved'
+      var fileName = req.files ? req.files.file.name : null;
+      if (fileName) {
+          // Move the file to the images store
+          req.files.file.mv(process.cwd() + '/public/imageStore/' + fileName, function(err){
+              if (err) {
+                  //console.log('Error during save to db:', fileName, error);
+                  res.status(500).send({
+                      status: 500,
+                      error: err
                   });
-              });
-          }
-      });
+              } else {
+                  console.log('File uploaded:', fileName);
+                  
+                  // Update the database
+                  imagesInfoService.create({
+                      imageId: fileName,
+                      caption: fileName,
+                      lastUpload: 1,
+                      isOriginal: 1,
+                      albums: ['__general'],
+                      inSlider: 0,
+                      visibility: 0 
+                  }).then(function(data){
+                      //console.log('Result of save to db:', data._id, data.imageId, data.createdAt);
+                      res.status(200).send({
+                          status: 200,
+                          _id: data._id,
+                          text: 'File \'' + data.imageId + '\' saved'
+                      });
+                  });
+              }
+              return;
+          });
+      } else {
+          res.status(201).send('Nothing to do');
+      }
   });
   
   
