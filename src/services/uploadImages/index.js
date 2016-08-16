@@ -1,24 +1,16 @@
 'use strict';
 
-const service = require('feathers-mongoose');
-//const uploadImages = require('./uploadImages-model');
 const hooks = require('./hooks');
-const multer = require('multer');
-const multipartMiddleware = multer();
-const dauria = require('dauria');
-
-// feathers-blob service
-const blobService = require('feathers-blob');
-// Here we initialize a FileSystem storage,
-// but you can use feathers-blob with any other
-// storage service like AWS or Google Drive.
-const fs = require('fs-blob-store');
-const blobStorage = fs(/*__dirname +*/ '/imageStore');
+const service = require('feathers-mongoose');
 const fileUpload = require('express-fileupload');
+const getImagesModel = require('../getImage/getImage-model');
 
 module.exports = function() {
   const app = this;
 
+  app.use('/imagesInfo', service({Model: getImagesModel}));
+  var imagesInfoService = app.service('imagesInfo');
+  
   app.use(fileUpload());
    
   app.post('/uploadImages', function(req, res) {
@@ -32,8 +24,25 @@ module.exports = function() {
               console.log('Move image callback error:', err, fileName);  
               res.status(500).send()
           } else {
-              console.log('File uploaded:', fileName);  
-              res.status(200).send()
+              console.log('File uploaded:', fileName);
+              
+              // Update the database
+              imagesInfoService.create({
+                  imageId: fileName,
+                  caption: fileName,
+                  lastUpload: 1,
+                  isOriginal: 1,
+                  albums: ['__general'],
+                  inSlider: 0,
+                  visibility: 0 
+              }).then(function(data){
+                  console.log('Result of save to db:', data._id, data.imageId, data.createdAt);
+                  res.status(200).send({
+                      status: 200,
+                      _id: data._id,
+                      text: 'File \'' + data.imageId + '\' saved'
+                  });
+              });
           }
       });
   });

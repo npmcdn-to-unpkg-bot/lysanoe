@@ -8,16 +8,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// This standard text removed and replace by empty schema 
-//const getImageSchema = new Schema({
-//  text: { type: String, required: true },
-//  createdAt: { type: Date, 'default': Date.now },
-//  updatedAt: { type: Date, 'default': Date.now }
-//});
+const getImagesSchema = new Schema({
+    imageId:    { type: String, required: false },
+    caption:    { type: String, required: false },
+    lastUpload: { type: Number },
+    isOriginal: { type: Number },
+    inSlider:   { type: Number },
+    visibility: { type: Number },
+    albums:     { type: Array },
+    createdAt:  { type: Date, 'default': Date.now },
+    updatedAt:  { type: Date, 'default': Date.now }
+});
 
 // Third parameter added = name of collection
-const getImageModel = mongoose.model('getImage',
-                                     new Schema(),
-                                     'imagesInfo');
+const getImagesModel = mongoose.model('getImage',
+                                       getImagesSchema,
+                                      'imagesInfo');
 
-module.exports = getImageModel;
+module.exports = getImagesModel;

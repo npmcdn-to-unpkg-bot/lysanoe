@@ -11,11 +11,10 @@ PRIOs:
 - photos
   * upload server side ->
     - give message back to the client,
-    - add to database,
     - pre/post processing: file types/size/authorisation,
-    - clean up all unused libraries
   * photo van mobiel using html5 tag ??
-  * checkbox + caption on hover
+  * getImage renamen naar imagesInfo
+- cordova + app
 - videos ??
 
 - Install imagemagick on aws server

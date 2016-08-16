@@ -1,14 +1,14 @@
 'use strict';
 
 const service = require('feathers-mongoose');
-const getImage = require('./getImage-model');
+const getImageModel = require('./getImage-model');
 const hooks = require('./hooks');
 
 module.exports = function() {
   const app = this;
 
   const options = {
-    Model: getImage,
+    Model: getImageModel,
     paginate: false
   };
 
