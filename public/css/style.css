@@ -275,6 +275,19 @@ img.uitnodiging.img-responsive {
 }
 
 /**************INTRODUCTION****************/
+.introduction p {
+    font-size: 14px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: none;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.introduction img {
+  margin-right: 5%;
+  margin-top: 5%;
+}
+
 
 .skill {
     padding-bottom: 5px;
@@ -401,6 +414,11 @@ body.photo {
   left: 15%;
   bottom: 10%;
   color: #ccc;
+}
+
+#take-photo-form {
+  text-align: center;
+
 }
 
 
