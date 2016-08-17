@@ -14,9 +14,10 @@ module.exports = function() {
   app.use(fileUpload());
    
   app.post('/uploadImages', function(req, res) {
-      //console.log('REQST', req.files, process.cwd(), process.env.user );
-      
+            
       var fileName = req.files ? req.files.file.name : null;
+      console.log('UploadImages: by, fileName:', process.env.user, fileName );
+
       if (fileName) {
           // Move the file to the images store
           req.files.file.mv(process.cwd() + '/public/imageStore/' + fileName, function(err){

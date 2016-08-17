@@ -9,6 +9,7 @@ PRIOs:
 - authenticate & authorize
   * error in version 0.7.9 ? with variable app not being global?
 - photos
+  * toegang tot imageStore op server - welke web user??
   * upload server side ->
     - give message back to the client,
     - pre/post processing: file types/size/authorisation,
