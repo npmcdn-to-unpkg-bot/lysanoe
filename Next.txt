@@ -11,9 +11,9 @@ PRIOs:
 - photos
   * toegang tot imageStore op server - welke web user??
   * upload server side ->
-    - give message back to the client,
+    - give message back to the client: niet allemaal in responseText ! ,
     - pre/post processing: file types/size/authorisation,
-  * photo van mobiel using html5 tag ??
+    - zie TODO in photo.html
   * getImage renamen naar imagesInfo
 - cordova + app
 - videos ??

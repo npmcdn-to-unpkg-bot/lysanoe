@@ -46,6 +46,10 @@
         <link rel="stylesheet" href="../dropzone/dropzone.css">
         <script src="../dropzone/dropzone.js"></script>
     
+        <!-- jGrowl-->
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
+
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -157,7 +161,56 @@
                 $('i.take-photo').click(function(){
                     $('form#take-photo-form').toggle();  
                 });
-            
+                
+                // Click event on submit of take photo form
+                $('form#take-photo-form').submit(function(event){
+                  
+                    var uploadedImage = event.target[0].files[0];
+                    console.log("uploadedImage", uploadedImage);
+
+                    // Create a fileReader that, when after reading the file, calls a server side method to
+                    // save to the server and update the metadata
+                    var readers = [];
+                    readers[0] = new FileReader();
+                    readers[0].onload = function(e) {
+                        console.log('Starting read...');
+                        $.ajax({
+                            url:  '/uploadImages',
+                            method: 'post',
+                            data: {
+                                data: JSON.stringify(e.target.result),
+                                fileName: uploadedImage.name
+                            },
+                            complete: function(data) {
+                                console.log('Complete after uploadImage:', data);
+                                if (data.responseText.indexOf(':200') > 0) {
+                                    $('form#take-photo-form').find('input').val('');
+                                    $.jGrowl('De pagina herladen ...');
+                                } else {
+                                    $.jGrowl('De foto bewaren is niet gelukt :-(', {sticky: true});
+                                }
+                            }
+                        });
+                    }
+                    readers[0].readAsBinaryString(uploadedImage);
+
+        
+                    //// De meeteor stappen ....
+                    //data.lastModifiedDate = new Date();
+                    //data.name = newFileName + newFileType;
+                    //reader.readAsBinaryString(newFile);
+                    // var reader = new FileReader();
+                    // reader.onload = function(e) {
+                    //     
+                    //     Logger.info('Read has started', e);
+                    //                 
+                    //     Meteor.call('imageUpload',
+                    //                 e.target.result,            // image binary as param 1
+                    //                 newFileName + newFileType,  // file name as param 2
+                    //                 function (err, result) {
+                    //                  ........
+                    //
+                });
             }
             
             // Fill the gallery with relevant images and update the album status to 'active'
@@ -227,8 +280,12 @@
                 <div class="section-title text-center">
                     <h3>Foto's <i class='fa fa-camera take-photo'></i></h3>
                 </div>
-                <form id="take-photo-form" style="display:none;"
-                      method="post" action="/uploadImages" name="files" enctype="multipart/form-data" >
+                <form id="take-photo-form"
+                      style="display:none;"
+                      method="post"
+                      onsubmit="console.log('OnSubmit');return false;"
+                      name="files"
+                      enctype="multipart/form-data" >
                    <input type="file" accept="image/*;capture=camera" style="display: inline-block;" name="file">
                    <button type='submit'>OK</button>
                </form>

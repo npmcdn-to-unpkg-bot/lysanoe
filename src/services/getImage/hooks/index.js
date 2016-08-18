@@ -22,17 +22,19 @@ exports.before = {
 exports.after = {
   all: [],
   find(hook) {
-      //console.log('afhookfind:', hook.result);
-      
       // Sort on createdAt date
       hook.result.sort(function (a, b){
           var aDate = a._doc.createdAt;
           var bDate = b._doc.createdAt;
           
-          if (!aDate) {
+          if (!aDate && !bDate) {
+              return 0;
+          } else if (!aDate) {
               return -1;
           } else if (!bDate) {
               return 1;
+          } else if (aDate == bDate) {
+            return 0
           }
           return aDate > bDate;  //dates.compare(a, b);
       });

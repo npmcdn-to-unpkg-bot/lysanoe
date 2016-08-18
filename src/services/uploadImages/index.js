@@ -1,8 +1,11 @@
 'use strict';
 
-const hooks = require('./hooks');
-const service = require('feathers-mongoose');
-const fileUpload = require('express-fileupload');
+const hooks       = require('./hooks');
+const service     = require('feathers-mongoose');
+const fileUpload  = require('express-fileupload');
+const fs          = require('file-system');
+
+
 const getImagesModel = require('../getImage/getImage-model');
 
 module.exports = function() {
@@ -14,11 +17,62 @@ module.exports = function() {
   app.use(fileUpload());
    
   app.post('/uploadImages', function(req, res) {
+      console.log('UploadImages: request');//:, req);
             
       var fileName = req.files ? req.files.file.name : null;
-      console.log('UploadImages: by, fileName:', process.env.user, fileName );
+      const binaryData = req.body.data ? JSON.parse(req.body.data) : null;
 
-      if (fileName) {
+      console.log('UploadImages: by, fileName, binary:', process.env.USER, fileName, binaryData ? 'isBinary' : null );
+      
+      // TODO: Must check here if permissions, filetypes, etc are correct !!!
+      // TODO: check on existing file name ?
+      // TODO: save to current ablbum
+      // TODO: fix lastUpload
+      // TODO: respond to client: status, done, etc
+
+      if (binaryData) {
+        
+                // Get the data
+                const buffer = new Buffer(binaryData, 'binary');
+                
+                var caption = fileName;
+
+                // Create the file name
+               const uploadTo = process.cwd() + '/public/imageStore/';
+               fileName = uploadTo + req.body.fileName;
+               
+               console.log('Starting file write for: ' + fileName);
+               
+               fs.writeFile(fileName, buffer, function (err) {
+                    if (err) {
+                        console.log('Err bij opslaan', err);
+                        return false;
+                    } else {
+                        console.log('File uploaded: ' + fileName);
+                        
+                        // Update the database
+                        imagesInfoService.create({
+                            imageId: fileName,
+                            caption: caption,
+                            lastUpload: 1,
+                            isOriginal: 1,
+                            albums: ['__general'],
+                            inSlider: 0,
+                            visibility: 0 
+                        }).then(function(data){
+                            //console.log('Result of save to db:', data._id, data.imageId, data.createdAt);
+                            res.status(200).send({
+                                status: 200,
+                                _id: data._id,
+                                text: 'File \'' + data.imageId + '\' saved'
+                            });
+                        });
+                        return true;
+                    }
+                });
+
+      } else if (fileName) {
+        
           // Move the file to the images store
           req.files.file.mv(process.cwd() + '/public/imageStore/' + fileName, function(err){
               if (err) {
@@ -50,6 +104,7 @@ module.exports = function() {
               }
               return;
           });
+          
       } else {
           res.status(201).send('Nothing to do');
       }
