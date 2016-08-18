@@ -167,6 +167,10 @@
                   
                     var uploadedImage = event.target[0].files[0];
                     console.log("uploadedImage", uploadedImage);
+                    
+                    $('form#take-photo-form').find('button[type="submit"]')
+                                             .attr('disabled', 'disabled')
+                                             .css('border', '1px solid red');
 
                     // Create a fileReader that, when after reading the file, calls a server side method to
                     // save to the server and update the metadata
@@ -189,6 +193,9 @@
                                 } else {
                                     $.jGrowl('De foto bewaren is niet gelukt :-(', {sticky: true});
                                 }
+                                $('form#take-photo-form').find('button[type="submit"]')
+                                                        .removeAttr('disabled')
+                                                        .css('border', '0px');
                             }
                         });
                     }
