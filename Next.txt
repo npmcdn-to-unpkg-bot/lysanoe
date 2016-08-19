@@ -6,9 +6,8 @@ BUGS:
 
 
 PRIOs:
+- foto upload op server + van foon ?! -> spaces in filenames on server
 - common html, js
-- server foto db opruimen
-- DNS
 - cordova + app
 - authenticate & authorize
   * error in version 0.7.9 ? with variable app not being global?

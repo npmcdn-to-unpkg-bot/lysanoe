@@ -228,21 +228,22 @@
     
             // Set up Feathers client side
             // TODO !!!!!: hostname, servicename, 
-            var socket = io('http://localhost:3030');
-            app = feathers()
-                .configure(feathers.hooks())
-                .configure(feathers.socketio(socket));
-            const uploadService = app.service('uploadImages');
-
-            // Event on file received
-            uploadService.on('created', function(file){
-                console.log('Received file', file);
-            });
+            //var socket = io('http://localhost:3030');
+            //app = feathers()
+            //    .configure(feathers.hooks())
+            //    .configure(feathers.socketio(socket));
+            //const uploadService = app.service('uploadImages');
+            //
+            //// Event on file received
+            //uploadService.on('created', function(file){
+            //    console.log('Received file', file);
+            //});
 
             // Initialise DropZone
             Dropzone.options.imagesUploadDropzone = {
                 paramName: "uri",
-                uploadMultiple: false,
+                //uploadMultiple: false,
+                dictDefaultMessage: 'Sleep foto\'s hier naar toe, of click om te selecteren',
                 init: function(){
                     this.on('uploadprogress', function(file, progress){
                         console.log('progresss', progress);
@@ -407,14 +408,10 @@
             <h4 class="modal-title" id="myModalLabel">Upload bestanden</h4>
           </div>
           <div class="modal-body">
-              Sleep je foto's hier naar toe
+              Sleep je foto's hier naar toe, of click in het venster
               <form action="/uploadImages"
                 class="dropzone"
-                id="my-awesome-dropzone"></form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+                id="imageDropzone"></form>
           </div>
         </div>
       </div>

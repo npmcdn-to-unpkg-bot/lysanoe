@@ -74,7 +74,10 @@ module.exports = function() {
       } else if (fileName) {
         
           // Move the file to the images store
-          req.files.file.mv(process.cwd() + '/public/imageStore/' + fileName, function(err){
+          var destFileName = process.cwd() + '/public/imageStore/' + fileName;
+          console.log('Starting file move to: ' + destFileName);
+
+          req.files.file.mv(destFileName, function(err){
               if (err) {
                   //console.log('Error during save to db:', fileName, error);
                   res.status(500).send({
