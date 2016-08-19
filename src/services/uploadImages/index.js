@@ -38,7 +38,7 @@ module.exports = function() {
                 var caption = req.body.fileName;
 
                 // Create the file name
-               const uploadTo = process.cwd() + 'current/public/imageStore/';
+               const uploadTo = process.cwd() + '/current/public/imageStore/';
                fileName = uploadTo + '"' + req.body.fileName + '"';
                
                console.log('Starting file write for: ' + fileName);
@@ -74,7 +74,7 @@ module.exports = function() {
       } else if (fileName) {
         
           // Move the file to the images store
-          var destFileName = process.cwd() + 'current/public/imageStore/"' + fileName + '"';
+          var destFileName = process.cwd() + '/current/public/imageStore/"' + fileName + '"';
           console.log('Starting file move to: ' + destFileName);
 
           req.files.file.mv(destFileName, function(err){
