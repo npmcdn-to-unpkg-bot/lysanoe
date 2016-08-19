@@ -200,23 +200,6 @@
                         });
                     }
                     readers[0].readAsBinaryString(uploadedImage);
-
-        
-                    //// De meeteor stappen ....
-                    //data.lastModifiedDate = new Date();
-                    //data.name = newFileName + newFileType;
-                    //reader.readAsBinaryString(newFile);
-                    // var reader = new FileReader();
-                    // reader.onload = function(e) {
-                    //     
-                    //     Logger.info('Read has started', e);
-                    //                 
-                    //     Meteor.call('imageUpload',
-                    //                 e.target.result,            // image binary as param 1
-                    //                 newFileName + newFileType,  // file name as param 2
-                    //                 function (err, result) {
-                    //                  ........
-                    //
                 });
             }
             
@@ -396,7 +379,7 @@
  
     <!-- START GALLERY -->
     <section>
-        <div class="container">
+        <div class="container imagesContainer">
           <div role="tabpanel">
               <!-- Tab panes -->
               <div class="tab-content">

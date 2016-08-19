@@ -6,6 +6,10 @@ BUGS:
 
 
 PRIOs:
+- common html, js
+- server foto db opruimen
+- DNS
+- cordova + app
 - authenticate & authorize
   * error in version 0.7.9 ? with variable app not being global?
 - photos
@@ -15,8 +19,8 @@ PRIOs:
     - pre/post processing: file types/size/authorisation,
     - zie TODO in photo.html
   * getImage renamen naar imagesInfo
-- cordova + app
-- videos ??
+- alles naar index.html
+
 
 - Install imagemagick on aws server
   * then test foto turn and save

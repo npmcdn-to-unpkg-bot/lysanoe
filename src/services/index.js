@@ -2,6 +2,7 @@
 const uploadImages = require('./uploadImages');
 const getAlbums = require('./getAlbums');
 const getImage = require('./getImage');
+const getVideos = require('./getVideos');
 const menuItems = require('./menuItems');
 const authentication = require('./authentication');
 const user = require('./user');
@@ -17,6 +18,7 @@ module.exports = function() {
   app.configure(user);
   app.configure(menuItems);
   app.configure(getImage);
+  app.configure(getVideos);
   app.configure(getAlbums);
   app.configure(uploadImages);
 };

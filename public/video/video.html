@@ -10,7 +10,11 @@
 
         <title>Video's</title>
 
-                <!-- Bootstrap Core CSS -->
+        <!-- Feathers -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
+        <script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
+        
+        <!-- Bootstrap Core CSS -->
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Font Awesome CSS -->
@@ -24,7 +28,6 @@
 
         <!-- Custom Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-
 
         <!-- Template js -->
         <script src="../js/jquery-2.1.1.min.js"></script>
@@ -42,73 +45,77 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+        <script type="text/javascript">
+          
+            'use strict';
+        
+            var app;
+          
+            // Things to do after the page loads
+            window.onload = function () {
+            
+                var currentAlbum;
+                
+                // Create all the video
+                $.ajax({
+                    url:  '/getVideos',
+                    success: function(data) {
+                        //console.log('Success for getVideos:', data);
+                        
+                        var html, videoLink, platform, title, instructionText;
+                        if (data) {
+                            if (data.data) data = data.data;
+                            for (var index in data) {
+                              
+                                videoLink = data[index].link;
+                                platform = data[index].platform;
+                                title = data[index].title;
 
+                                instructionText = platform == 'youtube'
+                                                    ? 'Hier <i class="fa fa-arrow-up"></i> opnieuw afspelen'
+                                                    : '';
+                                
+                                if (videoLink) {                
+                                    html = '<div class="col-md-4">';
+                                    html +=   '<h2>' + title + '</h2>';
+                                    html +=   '<div class="embed-responsive embed-responsive-16by9"">';
+                                    html +=       '<iframe class="embed-responsive-item" ';
+                                    html +=       'src="' + videoLink + '" allowfullscreen></iframe>';
+                                    html +=   '</div>';
+                                    html +=   '<span class="pull-left">' + instructionText + '</span>';
+                                    html += '</div>';
+                                    $('div.videosContainer').append(html);
+                                }
+                            }
+                        }
+                    },
+                    error: function(data) {
+                        console.log('Error after getVideos', data);
+                    }
+                });
+            
+            }
+        </script> 
     </head>
 
-
-<body>
-
-    <div class="container">
-
-        <!-- Close Cross -->
-        <a href="../index.html">  <i class="close pull-right"></i></a>
-        <!-- End Close Cross -->
-
-        <div class="row">
-            <div class="section-title text-center">
-                <h3>Video's</h3>
-            </div>
-        </div><!-- End row -->
-
-
+    <body>
         <div class="container">
-          <div class="row">
-
-            <div class="col-sm-6">
-
-                <h2>16:9 Responsive Aspect Ratio</h2>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="../video/video4.mp4"></iframe>
-                    </div>
-            </div>
-
-             <div class="col-sm-6">
-
-                <h2>16:9 Responsive Aspect Ratio</h2>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="../video/video3.mp4"></iframe>
-                    </div>
-            </div>
-
-        </div><!-- End row -->
-
+    
+            <!-- Close Cross -->
+            <a href="../index.html">  <i class="close pull-right"></i></a>
+            <!-- End Close Cross -->
+    
             <div class="row">
-
-             <div class="col-sm-6">
-
-                <h2>16:9 Responsive Aspect Ratio</h2>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="../video/video2.mp4"></iframe>
-                    </div>
-            </div>
-
-
-
-            <!-- <div class="col-sm-6">
-                <h2>4:3 Responsive Aspect Ratio</h2>
-                    <div class="embed-responsive embed-responsive-4by3">
-                        <iframe class="embed-responsive-item" src="//www.youtube.com/embed/ePbKGoIGAXY"></iframe>
-                    </div>
-            </div>
- -->
-          </div><!-- End Row -->
+                <div class="section-title text-center">
+                    <h3>Video's</h3>
+                </div>
+            </div><!-- End row -->
+    
+            <div class="container videosContainer">
+                <!-- Add video divs here -->
+            </div><!-- End container -->
         </div><!-- End container -->
-            
-               
-    </div><!-- End container -->
-
-
-</body>
+    </body>
 
 </html>
 
