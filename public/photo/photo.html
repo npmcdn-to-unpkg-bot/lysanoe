@@ -171,6 +171,7 @@
                     $('form#take-photo-form').find('button[type="submit"]')
                                              .attr('disabled', 'disabled')
                                              .css('border', '1px solid red');
+                    $('form#take-photo-form').find('img').removeClass('hide');
 
                     // Create a fileReader that, when after reading the file, calls a server side method to
                     // save to the server and update the metadata
@@ -196,6 +197,7 @@
                                 $('form#take-photo-form').find('button[type="submit"]')
                                                         .removeAttr('disabled')
                                                         .css('border', '0px');
+                                $('form#take-photo-form').find('img').addClass('hide');
                             }
                         });
                     }
@@ -279,6 +281,7 @@
                       enctype="multipart/form-data" >
                    <input type="file" accept="image/*;capture=camera" style="display: inline-block;" name="file">
                    <button type='submit'>OK</button>
+                   <img class='hide' src='/images/loader-horizontal.gif'>
                </form>
             </div>
       </div><!-- /.container -->
