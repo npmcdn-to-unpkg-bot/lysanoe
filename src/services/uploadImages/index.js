@@ -17,12 +17,21 @@ module.exports = function() {
   app.use(fileUpload());
    
   app.post('/uploadImages', function(req, res) {
-      console.log('UploadImages: request');//:, req);
             
-      var fileName = req.files ? req.files.file.name : null;
       const binaryData = req.body.data ? JSON.parse(req.body.data) : null;
-
+      
+      // Define a clean file name
+      var fileName, destPathFileName, cwd;
+      if (binaryData) {
+          fileName = req.body.fileName;
+      } else {
+          fileName = req.files ? req.files.file.name : null;
+      }
       console.log('UploadImages: by, fileName, binary:', process.env.USER, fileName, binaryData ? 'isBinary' : null );
+      fileName = fileName.replace(/ /g, '-');
+      cwd = process.cwd();
+      cwd += cwd.indexOf('/current') > 0 ? '' : '/current';
+      destPathFileName =  cwd + '/public/imageStore/' + fileName;
       
       // TODO: Must check here if permissions, filetypes, etc are correct !!!
       // TODO: check on existing file name ?
@@ -32,23 +41,20 @@ module.exports = function() {
 
       if (binaryData) {
         
-                // Get the data
-                const buffer = new Buffer(binaryData, 'binary');
+              // Get the data
+              const buffer = new Buffer(binaryData, 'binary');
                 
-                var caption = req.body.fileName;
+              // Define the caption
+              var caption = req.body.fileName;
 
-                // Create the file name
-               const uploadTo = process.cwd() + '/current/public/imageStore/';
-               fileName = uploadTo + '"' + req.body.fileName + '"';
+               console.log('Starting file write for: ' + destPathFileName);
                
-               console.log('Starting file write for: ' + fileName);
-               
-               fs.writeFile(fileName, buffer, function (err) {
+               fs.writeFile(destPathFileName, buffer, function (err) {
                     if (err) {
                         console.log('Err bij opslaan', err);
                         return false;
                     } else {
-                        console.log('File uploaded: ' + fileName);
+                        console.log('File uploaded: ' + destPathFileName);
                         
                         // Update the database
                         imagesInfoService.create({
@@ -74,10 +80,9 @@ module.exports = function() {
       } else if (fileName) {
         
           // Move the file to the images store
-          var destFileName = process.cwd() + '/current/public/imageStore/"' + fileName + '"';
-          console.log('Starting file move to: ' + destFileName);
+          console.log('Starting file move to: ' + destPathFileName);
 
-          req.files.file.mv(destFileName, function(err){
+          req.files.file.mv(destPathFileName, function(err){
               if (err) {
                   //console.log('Error during save to db:', fileName, error);
                   res.status(500).send({
@@ -85,7 +90,7 @@ module.exports = function() {
                       error: err
                   });
               } else {
-                  console.log('File uploaded:', fileName);
+                  console.log('File uploaded:', destPathFileName);
                   
                   // Update the database
                   imagesInfoService.create({
