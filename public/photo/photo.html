@@ -1,59 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="Lysa Noé" content="Website Lysa Noé">
-        
+        <script src="http://www.w3schools.com/lib/w3data.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+                integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+                crossorigin="anonymous"></script>
+
         <title>Foto's</title>
-
-        <!-- Feathers -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/core-js/2.1.4/core.min.js"></script>
-        <script src="//npmcdn.com/feathers-client@^1.0.0/dist/feathers.js"></script>
-        
-        <!-- Bootstrap Core CSS -->
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Font Awesome CSS -->
-        <link href="../css/font-awesome.min.css" rel="stylesheet">
-        
-        <!-- Custom CSS -->
-        <link href="../css/animate.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="../css/style.css" rel="stylesheet">
-
-        <!-- Custom Fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-
-        <!-- Sockets -->  
-        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-
-        <!-- Template js -->
-        <script src="../js/jquery-2.1.1.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
-        <script src="../js/jquery.appear.js"></script>
-        <!--<script src="../js/contact_me.js"></script>-->
-        <!--<script src="../js/jqBootstrapValidation.js"></script>-->
-        <!--<script src="../js/modernizr.custom.js"></script>-->
-        <script src="../js/script.js"></script>
-
-         <!-- Lightbox -->
-        <link href="../photo/css/lightbox.css" rel="stylesheet">
-
-        <!--Dropzone -->
-        <link rel="stylesheet" href="../dropzone/dropzone.css">
-        <script src="../dropzone/dropzone.js"></script>
-    
-        <!-- jGrowl-->
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.css" />
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.1/jquery.jgrowl.min.js"></script>
-
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
         <script type="text/javascript">
           
@@ -105,7 +58,9 @@
                     url:  '/getImages',
                     success: function(data) {
                         console.log('Success for getImages:', data);
-                        var caption, fileName, file, html, albums;
+                        var caption, fileName, file, html, albums, fileType;
+                        var videoTypes = ['mov', 'MOV'];
+                        
                         if (data) {
                             if (data.data) data = data.data;
                             for (var index in data) {
@@ -113,27 +68,47 @@
                                 albums = data[index].albums;
                                 caption = data[index].caption;
                                 fileName = data[index].imageId;
+                                
                                 if (fileName) {
                                     fileName = fileName.split('/').pop();
-                                    file = imageStore + fileName;
-                                  
-                                    html = '<div class="col-md-3 fromImageStore">';
-                                    html +=   '<div class="img-wrapper">';
-                                    html +=     '<a href="' + file + '" class="image-gallery"' +
-                                                ' data-lightbox="gallery"' +
-                                                ' data-title="' + caption + '"';
-                                    for (var aIndex in albums) {
-                                        html += ' data-album-' +  albums[aIndex];
-                                    }
-                                    html +=     '>';
-                                    html +=       '<img src="' + file + '" class="img-responsive">';
-                                    html +=     '</a>';
-                                    html +=     '<div class = "checkbox hide">';
-                                    html +=       '<label class="caption"><input type="checkbox"><p>' + caption + '</p></label>';
-                                    html +=     '</div>';                                 
-                                    html +=   '</div>';
-                                    html += '</div>';
+                                    fileType = fileName.split('.').pop();
                                     
+                                    file = imageStore + fileName;
+                                    
+                                    if (videoTypes.indexOf(fileType) > -1) {
+                                    	// This is a video
+	                                    html = '<div class="col-md-3 fromImageStore">';
+	                                    html +=   '<div class="video-wrapper">';
+	                                    html +=       '<video src="' + file + '"';
+	                                    for (var aIndex in albums) {
+	                                        html +=   ' data-album-' +  albums[aIndex];
+	                                    } 
+	                                    html +=       '></video>';	
+	                                    html +=     '<div class = "checkbox hide">';
+	                                    html +=       '<label class="caption"><input type="checkbox"><p>' + caption + '</p></label>';
+	                                    html +=     '</div>';                                 
+	                                    html +=   '</div>';
+	                                    html += '</div>';                                    	
+                                   	
+                                    } else {
+                                    	// This is a picture	                      
+	                                    html = '<div class="col-md-3 fromImageStore">';
+	                                    html +=   '<div class="img-wrapper">';
+	                                    html +=     '<a href="' + file + '" class="image-gallery"' +
+	                                                ' data-lightbox="gallery"' +
+	                                                ' data-title="' + caption + '"';
+	                                    for (var aIndex in albums) {
+	                                        html += ' data-album-' +  albums[aIndex];
+	                                    }
+	                                    html +=     '>';
+	                                    html +=       '<img src="' + file + '" class="img-responsive">';
+	                                    html +=     '</a>';
+	                                    html +=     '<div class = "checkbox hide">';
+	                                    html +=       '<label class="caption"><input type="checkbox"><p>' + caption + '</p></label>';
+	                                    html +=     '</div>';                                 
+	                                    html +=   '</div>';
+	                                    html += '</div>';	                                    
+                                    }
                                     $('div.tab-pane:first').find('div.row').append(html);
                                 }
                             }
@@ -223,7 +198,7 @@
                         $('div.imageGallery').find('div.fromImageStore').appendTo('div.localImageStore');
                         
                         // Move relevant images back
-                        $('div.localImageStore').find('a[data-album-' + albumName + ']').closest('div.fromImageStore').appendTo('div.imageGallery');
+                        $('div.localImageStore').find('[data-album-' + albumName + ']').closest('div.fromImageStore').appendTo('div.imageGallery');
                     }
                 }
             }
@@ -242,16 +217,16 @@
             //});
 
             // Initialise DropZone
-            Dropzone.options.imagesUploadDropzone = {
-                paramName: "uri",
-                //uploadMultiple: false,
-                dictDefaultMessage: 'Sleep foto\'s hier naar toe, of click om te selecteren',
-                init: function(){
-                    this.on('uploadprogress', function(file, progress){
-                        console.log('progresss', progress);
-                    });
-                }
-            };
+            //Dropzone.options.imagesUploadDropzone = {
+            //    paramName: "uri",
+            //    //uploadMultiple: false,
+            //    dictDefaultMessage: 'Sleep foto\'s hier naar toe, of click om te selecteren',
+            //    init: function(){
+            //        this.on('uploadprogress', function(file, progress){
+            //            console.log('progresss', progress);
+            //        });
+            //    }
+            //};
  
           // Set up Feathers client side
           //var host = 'http://localhost:3030';
@@ -267,6 +242,7 @@
   </head>
 
   <body class="photo">
+      <div w3-include-html="/common/common.html"></div>
 
       <div class="container">
             <div class="row">
@@ -290,19 +266,18 @@
       <nav class="navbar navbar-default navbar-fixed-top"> 
         <div class="container-fluid">
 
-                      <!-- Close Cross --> 
-		      <a href="../index.html" class="close-cross" aria-label="Close window">&times;</a>
-                      <!-- End Close Cross -->
-
-                  <!-- Toggle minimized button mobile devices Albums -->
-                      <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false"> <!-- data-target change to collapse-2 14/8/2016 -->
-                          <span class="sr-only">Toggle navigation</span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                        </button>
-                      </div>
+            <!-- Close Cross -->
+            <div w3-include-html="/common/close-cross.html"></div>
+    
+            <!-- Toggle minimized button mobile devices Albums -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false"> <!-- data-target change to collapse-2 14/8/2016 -->
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2"> <!--  ID change to collapse-2 14/8/2016 -->         
@@ -420,17 +395,8 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
-    <!--<script src="../js/bootstrap.min.js"></script>-->
-
-    <!-- Lightbox. Leave this at the botom of the file! -->
-    <script src="../photo/js/lightbox.js"></script>
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Load common HTML -->
+    <script>w3IncludeHTML();</script>
+    
   </body>
 </html>

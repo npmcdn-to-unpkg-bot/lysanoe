@@ -6,8 +6,12 @@ BUGS:
 
 
 PRIOs:
-- foto upload op server + van foon ?! -> spaces in filenames on server
 - common html, js
+- foto verwijderen
+- foto auto orienteren
+- foto draaien
+
+
 - cordova + app
 - authenticate & authorize
   * error in version 0.7.9 ? with variable app not being global?
@@ -37,7 +41,7 @@ PRIOs:
 - Multiple fotos in 1 keer bij 'choose fotos'
 - video zichtbaarhied ook instelbaar
 - publish/notify/share fotos/blogs/etc to FB
-- verzamelen van #lysanoŽ
+- verzamelen van #lysanoï¿½
 - 1e verjaardag uitnodiging - mensen emailen  om lif te worden en dan de de info zien
 - Reply/comments on foto/blog, verwijderbaar maken
 - Timeline fotos toevoegen, liefst van foto lib, anders zoals tekstvak
